@@ -121,7 +121,7 @@ body {
   }
 }
 
-.win-modal {
+.win-modal, .lose-modal {
   position: fixed;
   top: 0;
   left: 0;
@@ -153,29 +153,21 @@ body {
 }
 
 .modal-content button img {
-    display: block;
-    width: fit-content;
-    border: none;
-    margin: 0;
-    height: 60px;
-    border-radius: 8px;
-    transition: transform 0.2s;
-  }
+  display: block;
+  width: fit-content;
+  border: none;
+  margin: 0;
+  height: 60px;
+  border-radius: 8px;
+  transition: transform 0.2s;
+}
 
 .play-again img:hover {
     transform: scale(1.05);
     content: url('images/play-again-hover.png');
 }
 
-.lose-modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.6);
-  display: none;
-  align-items: center;
-  justify-content: center;
-  z-index: 1100;
+.play-again-lose img:hover {
+    transform: scale(1.05);
+    content: url('images/try-again-hover.png');
 }
