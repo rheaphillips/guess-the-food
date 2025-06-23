@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Needs Wordle</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="confetti-container"></div>
+  <div class="win-modal">
+    <div class="modal-content">
+      <h2>🎉 You won!</h2>
+      <button class="play-again">
+        <img src="images/play-again.png" alt="play-again" class="icon">
+      </button>
+    </div>
+  </div>
+  <div class='lose-modal'>
+    <div class="modal-content">
+      <h2>💔 You lost!</h2>
+      <p id="reveal-word"></p>
+      <button class="play-again-lose">
+        <img src="images/try-again.png" alt="try-again" class="icon">
+      </button>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
+

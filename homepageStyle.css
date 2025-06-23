@@ -1,0 +1,21 @@
+body {
+  background-image: url('images/background.png');
+  background-size: 1300px;
+  background-attachment: fixed;
+  background-position: center;
+}
+
+.button img {
+    display: block;
+    width: fit-content;
+    margin: 575px auto 0 auto;
+    width: 160px;
+    height: 80px;
+    border-radius: 8px;
+    transition: transform 0.2s;
+  }
+
+.button img:hover {
+    transform: scale(1.05);
+    content: url('images/play-hover.png');
+}
