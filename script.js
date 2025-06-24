@@ -26,8 +26,8 @@ const displayBoxes = function () {
     word = []
     for (let j = 0; j < chosenWord.length; j++) {
       box = document.createElement('div');
-      if (chosenWord[j] != ' ') box.classList.add('box');
-      else box.classList.add('space-box');
+      box.classList.add('box');
+      if (chosenWord[j] != ' ') box.classList.add('text-box');
       grid.appendChild(box);
       word.push(box);
     }
