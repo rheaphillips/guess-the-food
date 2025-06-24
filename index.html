@@ -9,9 +9,20 @@
 <body class="home">
     <div class="buttons">
         <button class="instructions-button"></button>
+        <div class="modal hidden">
+            <button class="close-modal">&times;</button>
+            <h1>Instructions</h1>
+            <h2>Guess the food item in 6 tries and win Scene+ points!</h2>
+            <ul>
+                <li>Each guess must be a valid food item with the correct length</li>
+                <li>After entering each word, the colour of the tiles change to reveal how close close the guess was to the word</li>
+            </ul>
+        </div>
         <a href="game.html" class="play-button">
             <img src="images/play.png" alt="play" class="icon">
         </a>
+        <div class="overlay hidden"></div>
+        <script src="home.js"></script>
     </div>
 </body>
 </html>

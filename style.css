@@ -1,21 +1,26 @@
 /* || GENERAL STYLES */
-.home {
-  background-image: url('images/background.png');
+body {
   background-size: 1300px;
   background-attachment: fixed;
   background-position: center;
-}
-
-.game {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0;
   padding: 2rem;
-  background-image: url('images/background-game.png');
-  background-size: 1300px;
-  background-attachment: fixed;
-  background-position: center;
-  background-color: rgba(0,0,0,0.5);
   color: #333;
+}
+
+.home {
+  background-image: url('images/background.png');  
+}
+
+.game {
+  background-image: url('images/background-game.png');
+  background-color: rgba(0,0,0,0.5);
+}
+
+li {
+  text-align: left;
+  font-size: 20px;
 }
 
 /* || BUTTONS */
@@ -211,6 +216,17 @@
   height: 60px;
   border-radius: 8px;
   transition: transform 0.2s;
+}
+
+.close-modal {
+  position: absolute;
+  top: 1.2rem;
+  right: 2rem;
+  font-size: 3rem;
+  color: #333;
+  cursor: pointer;
+  border: none;
+  background: none;
 }
 
 .play-again img:hover {
