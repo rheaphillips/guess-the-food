@@ -65,27 +65,29 @@ const confetti = function () {
   }
 }
 
-let absentLetters = [];
+let correctLetters = new Set([]), presentLetters = new Set([]), absentLetters = new Set([]);
 window.addEventListener('keydown', function (e) {
-  if (letterNum < chosenWord.length && alphabet.includes(e.key)) {
-    words[wordNum][letterNum].innerHTML = e.key;
-    if (absentLetters.includes(e.key)) words[wordNum][letterNum].classList.add('absent');
+  let key = e.key.toLowerCase();
+  if (letterNum < chosenWord.length && alphabet.includes(key)) {
+    words[wordNum][letterNum].innerHTML = key;
+    if ((absentLetters.difference(presentLetters).difference(correctLetters)).has(key)) words[wordNum][letterNum].classList.add('absent');
     letterNum++;
     if (chosenWord[letterNum] == ' ') letterNum++;
   }
-  if (e.key == "Enter" && letterNum == chosenWord.length) {
+  if (key == "enter" && letterNum == chosenWord.length) {
     words[wordNum].forEach((letter, i) => {
       if (letter.innerHTML == chosenWord[i] || chosenWord[i] == ' ') {
         letterCorrectNum++;
         letter.classList.add('correct');
+        correctLetters.add(letter.innerHTML);
       } 
-      else if (chosenWord.includes(letter.innerHTML) && chosenWord.split('').reduce((acc, cur, i) => {
-        if (cur == letter.innerHTML) return acc & words[wordNum][i].innerHTML != letter.innerHTML;
-        else return acc;
-      }, true)) letter.classList.add('present');
+      else if (chosenWord.includes(letter.innerHTML) && chosenWord.split('').reduce((acc, cur, i) => acc & cur == letter.innerHTML ? words[wordNum][i].innerHTML != letter.innerHTML : acc, true)) {
+        letter.classList.add('present');
+        presentLetters.add(letter.innerHTML);
+      } 
       else {
         letter.classList.add('absent');
-        absentLetters.push(letter.innerHTML);
+        absentLetters.add(letter.innerHTML);
       } 
     });
 
@@ -101,9 +103,9 @@ window.addEventListener('keydown', function (e) {
     letterNum = 0;
     wordNum++;
   }
-  if (e.key == "Backspace" && letterNum > 0) {
+  if (key == "backspace" && letterNum > 0) {
     letterNum--;
-    if (absentLetters.includes(words[wordNum][letterNum].innerHTML)) words[wordNum][letterNum].classList.remove('absent');
+    if (absentLetters.has(words[wordNum][letterNum].innerHTML)) words[wordNum][letterNum].classList.remove('absent');
     if (chosenWord[letterNum] == ' ') letterNum--;
     words[wordNum][letterNum].innerHTML = '';
   }
