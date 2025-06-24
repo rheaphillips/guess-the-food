@@ -1,4 +1,4 @@
-let container = document.querySelector('.confetti-container'), winModal = document.querySelector('.win-modal'), loseModal = document.querySelector('.lose-modal'); 
+let container = document.querySelector('.confetti-container'), overlay = document.querySelector('.overlay'), winModal = document.querySelector('.win-modal'), loseModal = document.querySelector('.lose-modal'); 
 let alphabet = "abcdefghijklmnopqrstuvwxyz".split('');
 
 const groceryWords = ["apple", "banana", "orange", "grape", "pear", "peach", "plum", "cherry", "strawberry", "blueberry", "raspberry", "blackberry", "watermelon", "cantaloupe", "honeydew", "pineapple", "mango", "papaya", "kiwi", "fig", "date", "pomegranate", "coconut", "lemon", "lime", "grapefruit", "tangerine", "nectarine", "apricot", "cranberry", "broccoli", "carrot", "potato", "sweet potato", "onion", "garlic", "celery", "spinach", "kale", "lettuce", "cabbage", "brussels sprouts", "cauliflower", "zucchini", "cucumber", "squash", "pumpkin", "bell pepper", "jalapeno", "chili pepper", "tomato", "corn", "peas", "green beans", "asparagus", "eggplant", "beet", "radish", "turnip", "leek", "mushroom", "parsnip", "artichoke", "avocado", "arugula", "bok choy", "collard greens", "fennel", "shallot", "chard", "beef", "chicken", "pork", "lamb", "turkey", "duck", "bacon", "ham", "sausage", "steak", "ground beef", "meatballs", "ribs", "salami", "prosciutto", "venison", "goat", "veal", "brisket", "roast", "milk", "cheese", "butter", "yogurt", "cream", "ice cream", "sour cream", "cottage cheese", "mozzarella", "cheddar", "parmesan", "feta", "blue cheese", "gouda", "ricotta", "cream cheese", "eggs", "almond milk", "soy milk", "oat milk", "bread", "bagel", "bun", "roll", "croissant", "tortilla", "pita", "naan", "english muffin", "biscuit", "pasta", "spaghetti", "macaroni", "fettuccine", "penne", "lasagna", "noodles", "ramen", "udon", "rice", "quinoa", "couscous", "barley", "bulgur", "oats", "granola", "flour", "sugar", "brown sugar", "powdered sugar", "honey", "maple syrup", "molasses", "corn syrup", "salt", "pepper", "cinnamon", "nutmeg", "cloves", "allspice", "ginger", "cumin", "coriander", "paprika", "chili powder", "turmeric", "mustard", "oregano", "thyme", "rosemary", "basil", "parsley", "sage", "dill", "bay leaf", "vanilla", "vinegar", "soy sauce", "hot sauce", "ketchup", "pan dulce", "mayonnaise", "barbecue sauce", "salad dressing", "olive oil", "canola oil", "vegetable oil", "coconut oil", "peanut butter", "jam", "jelly", "margarine", "shortening", "yeast", "baking powder", "baking soda", "chocolate", "cocoa", "chips", "candy", "cookies", "crackers", "pretzels", "popcorn", "nuts", "almonds", "cashews", "peanuts", "walnuts", 
@@ -12,6 +12,7 @@ const displayGrid = function () {
   grid.classList.add('grid');
   document.body.appendChild(grid);
   grid.style.gridTemplateColumns = `repeat(${chosenWord.length}, 1fr)`;
+  grid.style.maxWidth = `${chosenWord.length * 100}px`;
 }
 
 let words;
@@ -45,9 +46,14 @@ const reset = function () {
 
   displayBoxes();
 
+  correctLetters.clear();
+  presentLetters.clear();
+  absentLetters.clear();
+
   container.innerHTML = '';
-  winModal.style.display = 'none';
-  loseModal.style.display = 'none';
+  overlay.classList.add('hidden');
+  winModal.classList.add('hidden');
+  loseModal.classList.add('hidden');
 }
 
 // Confetti function
@@ -70,7 +76,7 @@ window.addEventListener('keydown', function (e) {
   let key = e.key.toLowerCase();
   if (letterNum < chosenWord.length && alphabet.includes(key)) {
     words[wordNum][letterNum].innerHTML = key;
-    if ((absentLetters.difference(presentLetters).difference(correctLetters)).has(key)) words[wordNum][letterNum].classList.add('absent');
+    if (absentLetters.has(key)) words[wordNum][letterNum].classList.add('absent');
     letterNum++;
     if (chosenWord[letterNum] == ' ') letterNum++;
   }
@@ -80,23 +86,27 @@ window.addEventListener('keydown', function (e) {
         letterCorrectNum++;
         letter.classList.add('correct');
         correctLetters.add(letter.innerHTML);
+        absentLetters.delete(letter.innerHTML);
       } 
       else if (chosenWord.includes(letter.innerHTML) && chosenWord.split('').reduce((acc, cur, i) => acc & cur == letter.innerHTML ? words[wordNum][i].innerHTML != letter.innerHTML : acc, true)) {
         letter.classList.add('present');
         presentLetters.add(letter.innerHTML);
+        absentLetters.delete(letter.innerHTML);
       } 
       else {
         letter.classList.add('absent');
-        absentLetters.add(letter.innerHTML);
+        if (!(correctLetters.has(letter.innerHTML) || presentLetters.has(letter.innerHTML))) absentLetters.add(letter.innerHTML);
       } 
     });
 
-    if (letterCorrectNum == chosenWord.length) {
+    if (letterCorrectNum === chosenWord.length) {
       confetti();
-      winModal.style.display = 'flex';
+      overlay.classList.remove('hidden');
+      winModal.classList.remove('hidden');
     } else if (wordNum === 5) {
       document.getElementById('reveal-word').textContent = `Word: ${chosenWord}`;
-      loseModal.style.display = 'flex';
+      overlay.classList.remove('hidden');
+      loseModal.classList.remove('hidden');
     }
 
     letterCorrectNum = 0;
