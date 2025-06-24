@@ -1,5 +1,5 @@
 let container = document.querySelector('.confetti-container'), overlay = document.querySelector('.overlay'), winModal = document.querySelector('.win-modal'), loseModal = document.querySelector('.lose-modal'); 
-let alphabet = "abcdefghijklmnopqrstuvwxyz".split('');
+let alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split('');
 
 const groceryWords = ["apple", "banana", "orange", "grape", "pear", "peach", "plum", "cherry", "strawberry", "blueberry", "raspberry", "blackberry", "watermelon", "cantaloupe", "honeydew", "pineapple", "mango", "papaya", "kiwi", "fig", "date", "pomegranate", "coconut", "lemon", "lime", "grapefruit", "tangerine", "nectarine", "apricot", "cranberry", "broccoli", "carrot", "potato", "sweet potato", "onion", "garlic", "celery", "spinach", "kale", "lettuce", "cabbage", "brussels sprouts", "cauliflower", "zucchini", "cucumber", "squash", "pumpkin", "bell pepper", "jalapeno", "chili pepper", "tomato", "corn", "peas", "green beans", "asparagus", "eggplant", "beet", "radish", "turnip", "leek", "mushroom", "parsnip", "artichoke", "avocado", "arugula", "bok choy", "collard greens", "fennel", "shallot", "chard", "beef", "chicken", "pork", "lamb", "turkey", "duck", "bacon", "ham", "sausage", "steak", "ground beef", "meatballs", "ribs", "salami", "prosciutto", "venison", "goat", "veal", "brisket", "roast", "milk", "cheese", "butter", "yogurt", "cream", "ice cream", "sour cream", "cottage cheese", "mozzarella", "cheddar", "parmesan", "feta", "blue cheese", "gouda", "ricotta", "cream cheese", "eggs", "almond milk", "soy milk", "oat milk", "bread", "bagel", "bun", "roll", "croissant", "tortilla", "pita", "naan", "english muffin", "biscuit", "pasta", "spaghetti", "macaroni", "fettuccine", "penne", "lasagna", "noodles", "ramen", "udon", "rice", "quinoa", "couscous", "barley", "bulgur", "oats", "granola", "flour", "sugar", "brown sugar", "powdered sugar", "honey", "maple syrup", "molasses", "corn syrup", "salt", "pepper", "cinnamon", "nutmeg", "cloves", "allspice", "ginger", "cumin", "coriander", "paprika", "chili powder", "turmeric", "mustard", "oregano", "thyme", "rosemary", "basil", "parsley", "sage", "dill", "bay leaf", "vanilla", "vinegar", "soy sauce", "hot sauce", "ketchup", "pan dulce", "mayonnaise", "barbecue sauce", "salad dressing", "olive oil", "canola oil", "vegetable oil", "coconut oil", "peanut butter", "jam", "jelly", "margarine", "shortening", "yeast", "baking powder", "baking soda", "chocolate", "cocoa", "chips", "candy", "cookies", "crackers", "pretzels", "popcorn", "nuts", "almonds", "cashews", "peanuts", "walnuts", 
   "pecans", "sunflower seeds", "pumpkin seeds", "trail mix", "dried fruit", "raisins", "dates", "prunes", "apricots", "figs", "cereal", "cornflakes", "granola bars", "snack bars", "protein bars", "frozen pizza", "frozen vegetables", "frozen fruit", "parboiled rice", "chicken wings", "apple sauce", "soda", "juice", "orange juice", "apple juice", "grape juice", "cranberry juice", "lemonade", "iced tea", "coffee", "tea", "bottled water", "sparkling water", "sports drink", "energy drink", "wine", "beer", "liquor", "cocktail mixer", "broth", "stock", "canned soup", "canned beans", "canned tomatoes", "canned corn", "canned tuna", "canned chicken", "canned fruit", "canned vegetables", "pickles", "olives", "relish", "capers", "tofu", "tempeh", "seitan", "veggie burger", "cilantro", "seaweed", "miso", "sriracha", "horseradish", "wasabi", "chutney", "salsa", "guacamole", "hummus", "baba ganoush", "tzatziki", "pesto", "gravy", "ranch dressing", "caesar dressing", "italian dressing", "balsamic vinegar", "red wine vinegar", "white vinegar", 
@@ -42,6 +42,7 @@ const reset = function () {
   letterCorrectNum = 0;
 
   [chosenWord] = groceryWords.splice(Math.round(Math.random()*(groceryWords.length - 1)), 1);
+  chosenWord = chosenWord.toUpperCase();
   console.log('New word:', chosenWord);
 
   displayBoxes();
@@ -73,14 +74,14 @@ const confetti = function () {
 
 let correctLetters = new Set([]), presentLetters = new Set([]), absentLetters = new Set([]);
 window.addEventListener('keydown', function (e) {
-  let key = e.key.toLowerCase();
+  let key = e.key.toUpperCase();
   if (letterNum < chosenWord.length && alphabet.includes(key)) {
     words[wordNum][letterNum].innerHTML = key;
     if (absentLetters.has(key)) words[wordNum][letterNum].classList.add('absent');
     letterNum++;
     if (chosenWord[letterNum] == ' ') letterNum++;
   }
-  if (key == "enter" && letterNum == chosenWord.length) {
+  if (key == "ENTER" && letterNum == chosenWord.length) {
     words[wordNum].forEach((letter, i) => {
       if (letter.innerHTML == chosenWord[i] || chosenWord[i] == ' ') {
         letterCorrectNum++;
@@ -113,7 +114,7 @@ window.addEventListener('keydown', function (e) {
     letterNum = 0;
     wordNum++;
   }
-  if (key == "backspace" && letterNum > 0) {
+  if (key == "BACKSPACE" && letterNum > 0) {
     letterNum--;
     if (absentLetters.has(words[wordNum][letterNum].innerHTML)) words[wordNum][letterNum].classList.remove('absent');
     if (chosenWord[letterNum] == ' ') letterNum--;
