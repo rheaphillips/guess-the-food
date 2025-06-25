@@ -1,8 +1,8 @@
 let container = document.querySelector('.confetti-container'), overlay = document.querySelector('.overlay'), winModal = document.querySelector('.win-modal'), loseModal = document.querySelector('.lose-modal'); 
-let alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split('');
+
+const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split('');
 
 let affData, dicData, dictionary;
-
 window.onload = async function () {
   // Load dictionary files as plain text
   affData = await fetch('typo/dictionaries/en_US.aff').then(r => r.text());
@@ -63,11 +63,12 @@ const displayBoxes = function () {
   }
 }
 
-let letterNum, wordNum, letterCorrectNum, chosenWord, enteredWord;
+let letterNum, wordNum, numOfCorrectLetters, chosenWord, enteredWord;
+let correctLetters = new Set([]), presentLetters = new Set([]), absentLetters = new Set([]);
 const reset = function () {
   letterNum = 0;
   wordNum = 0;
-  letterCorrectNum = 0;
+  numOfCorrectLetters = 0;
   enteredWord = '';
 
   [chosenWord] = groceryWords.splice(Math.round(Math.random()*(groceryWords.length - 1)), 1);
@@ -83,9 +84,7 @@ const reset = function () {
   absentLetters.clear();
 
   container.innerHTML = '';
-  overlay.classList.add('hidden');
-  winModal.classList.add('hidden');
-  loseModal.classList.add('hidden');
+  [overlay, winModal, loseModal].forEach((elem) => elem.classList.add('hidden'));
 }
 
 // Confetti function
@@ -103,8 +102,17 @@ const confetti = function () {
   }
 }
 
-let correctLetters = new Set([]), presentLetters = new Set([]), absentLetters = new Set([]);
+const updateLetterColor = function (state, letter, i) {
+  words[wordNum][i].classList.add(state);
+  document.querySelector(`[data-key="${letter}"]`)?.classList.add(state);
+}  
+
+const validEntry = function (key) {
+  return key == "ENTER" && letterNum == chosenWord.length && (enteredWord === chosenWord || groceryWords.includes(enteredWord.toLowerCase()) || enteredWord.split(' ').reduce((acc, word) => acc && dictionary.check(word), true));
+}
+
 const evalKey = function (key) {
+
   if (letterNum < chosenWord.length && alphabet.includes(key)) {
     words[wordNum][letterNum].innerHTML = key;
     enteredWord = enteredWord + key;
@@ -115,26 +123,28 @@ const evalKey = function (key) {
       letterNum++;
     } 
   }
-  if (key == "ENTER" && letterNum == chosenWord.length && (enteredWord === chosenWord || groceryWords.includes(enteredWord.toLowerCase()) || enteredWord.split(' ').reduce((acc, word) => acc && dictionary.check(word), true))) {
+
+  if (validEntry(key)) {
     enteredWord.split('').forEach((letter, i) => {
-      if (letter == chosenWord[i] || chosenWord[i] == ' ') {
-        letterCorrectNum++;
-        words[wordNum][i].classList.add('correct');
-        document.querySelector(`[data-key="${letter}"]`).classList.add('correct');
+      let state = null;
+      if (letter == chosenWord[i]) {
+        numOfCorrectLetters++;
+        state = 'correct';
         correctLetters.add(letter);
         absentLetters.delete(letter);
       } 
       else if (chosenWord.includes(letter) && chosenWord.split('').reduce((acc, cur, i) => acc & cur == letter ? words[wordNum][i].innerHTML != letter : acc, true)) {
-        words[wordNum][i].classList.add('present');
-        document.querySelector(`[data-key="${letter}"]`).classList.add('present');
+        state = 'present';
         presentLetters.add(letter);
         absentLetters.delete(letter);
       } 
       else {
-        words[wordNum][i].classList.add('absent');
-        document.querySelector(`[data-key="${letter}"]`).classList.add('absent');
+        state = 'absent';
         if (!(correctLetters.has(letter) || presentLetters.has(letter))) absentLetters.add(letter);
-      } 
+      }
+
+      updateLetterColor(state, letter, i);
+
     });
 
     if (enteredWord === chosenWord) {
@@ -148,10 +158,11 @@ const evalKey = function (key) {
     }
 
     enteredWord = '';
-    letterCorrectNum = 0;
+    numOfCorrectLetters = 0;
     letterNum = 0;
     wordNum++;
   }
+
   if (key == "BACKSPACE" && letterNum > 0) {
     letterNum--;
     enteredWord = enteredWord.slice(0, -1);
@@ -161,17 +172,10 @@ const evalKey = function (key) {
   }
 }
 
-window.addEventListener('keydown', function (e) {
-  evalKey(e.key.toUpperCase());
-})
+window.addEventListener('keydown', e => evalKey(e.key.toUpperCase()));
 
-keyboardContainer.addEventListener('click', e => {
-  if (!e.target.classList.contains('key')) return;
-  evalKey(e.target.getAttribute('data-key').toUpperCase());
-});
+keyboardContainer.addEventListener('click', e => !e.target.classList.contains('key') || evalKey(e.target.getAttribute('data-key').toUpperCase()));
 
-// Replay button handler
-document.querySelector('.play-again').addEventListener('click', reset);
-document.querySelector('.play-again-lose').addEventListener('click', reset);
+[document.querySelector('.play-again'), document.querySelector('.play-again-lose')].forEach(elem => elem.addEventListener('click', reset));
 
 reset();
