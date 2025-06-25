@@ -3,10 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Needs Wordle</title>
+  <title>Needs Mini Game: Guess the Food!</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body class="game">
+  <button>
+    <img src="images/help.png" alt="help" class = "button help-button">
+  </button>
+  <div class="modal help-modal hidden">
+    <button class="close-modal">&times;</button>
+    <h1>Instructions</h1>
+    <h2>Guess the food item in 6 tries!</h2>
+    <ul>
+      <li>Each guess must be a valid food item with the correct length</li>
+      <li>After entering each word, the colour of the tiles change to reveal how close your guess was to the word</li>
+    </ul>
+    <h2>Examples</h2>
+    <img src="images/instructions-1.png" alt="correct letter" class="modal-img">
+    <p>A is in the word and in the correct spot</p>
+    <img src="images/instructions-2.png" alt="present letter" class="modal-img">
+    <p>D is in the word but in the wrong spot.</p>
+    <img src="images/instructions-3.png" alt="absent letter" class="modal-img">
+    <p>T is not in the word in any spot.</p>
+  </div>
   <div class="keyboard"></div>
   <div class="confetti-container"></div>
   <div class="modal win-modal hidden">

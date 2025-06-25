@@ -41,35 +41,42 @@ li, p {
   max-width: 600px;
 }
 
-.play-button img {
+.button {
   display: flex;
-  width: fit-content;
-  width: 160px;
-  height: 80px;
   border-radius: 8px;
   transition: transform 0.2s;
+  border: 0;
+}
+
+.button:hover {
+  transform: scale(1.05);
+}
+
+.play-button img {
+  width: 160px;
+  height: 80px;
 }
 
 .play-button img:hover {
-  transform: scale(1.05);
   content: url('images/play-hover.png');
 }
 
 .instructions-button {
   background-image: url(images/instructions.png);
   background-size: 100%;
-  border: 0;
-  display: flex;
-  width: fit-content;
   width: 370.85px;
   height: 80px;
-  border-radius: 8px;
-  transition: transform 0.2s;
 }
 
 .instructions-button:hover {
-  transform: scale(1.05);
   background-image: url(images/instructions-hover.png);
+}
+
+.help-button {
+  position: fixed;
+  margin-left: 900px;
+  width: 75px;
+  height: 75px;
 }
 
 /* || GRID */
