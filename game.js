@@ -74,6 +74,8 @@ const reset = function () {
   chosenWord = chosenWord.toUpperCase();
   console.log('New word:', chosenWord);
 
+  alphabet.forEach((letter) => ['correct', 'present', 'absent'].forEach((cls) => document.querySelector(`[data-key="${letter}"]`).classList.remove(cls)));
+
   displayBoxes();
 
   correctLetters.clear();
@@ -118,16 +120,19 @@ const evalKey = function (key) {
       if (letter == chosenWord[i] || chosenWord[i] == ' ') {
         letterCorrectNum++;
         words[wordNum][i].classList.add('correct');
+        document.querySelector(`[data-key="${letter}"]`).classList.add('correct');
         correctLetters.add(letter);
         absentLetters.delete(letter);
       } 
       else if (chosenWord.includes(letter) && chosenWord.split('').reduce((acc, cur, i) => acc & cur == letter ? words[wordNum][i].innerHTML != letter : acc, true)) {
         words[wordNum][i].classList.add('present');
+        document.querySelector(`[data-key="${letter}"]`).classList.add('present');
         presentLetters.add(letter);
         absentLetters.delete(letter);
       } 
       else {
         words[wordNum][i].classList.add('absent');
+        document.querySelector(`[data-key="${letter}"]`).classList.add('absent');
         if (!(correctLetters.has(letter) || presentLetters.has(letter))) absentLetters.add(letter);
       } 
     });
