@@ -99,6 +99,7 @@ const createEventListeners = function () {
   elems.keyboard.addEventListener('click', e => !e.target.classList.contains('key') || evalKey(e.target.getAttribute('data-key').toUpperCase()));
   [elems.playAgain, elems.playAgainLose].forEach(elem => elem.addEventListener('click', reset));
   help.helpModalEventListeners();
+  elems.restartButton.addEventListener('click', reset);
 }
 
 const reset = function () {
