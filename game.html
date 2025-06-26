@@ -6,10 +6,32 @@
   <title>Needs Mini Game: Guess the Food!</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body class="game">
-  <!-- <button>
-    <img src="images/help.png" alt="help" class = "button help-button">
-  </button> -->
+
+  <!-- NAVIGATION BAR -->
+  <nav>
+    <ul class = "navbar">
+      <li><a class="active" href="index.html">
+        <img src="assets/home.png" alt="home">
+      </a></li>
+      <li><a href="#">
+        <img src="assets/help.png" alt="help">
+      </a></li>
+      <li><a href="#">
+        <img src="assets/hint.png" alt="hint">
+      </a></li>
+      <li><a href="#">
+        <img src="assets/restart.png" alt="restart">
+      </a></li>
+    </ul>
+  </nav>
+
+  <!-- MAIN GAME -->
+  <div class="grid"></div>
+  <div class="keyboard"></div>
+
+  <!-- MODALS -->
   <div class="modal help-modal hidden">
     <button class="close-modal">&times;</button>
     <h1>Instructions</h1>
@@ -26,14 +48,14 @@
     <img src="assets/instructions-3.png" alt="absent letter" class="modal-img">
     <p>T is not in the word in any spot.</p>
   </div>
-  <div class="keyboard"></div>
-  <div class="confetti-container"></div>
+
   <div class="modal win-modal hidden">
     <h1>🎉 YOU WON!</h1>
     <button class="play-again">
       <img src="assets/play-again.png" alt="play-again" class="modal-img">
     </button>
   </div>
+
   <div class="modal lose-modal hidden">
     <h1>💔 YOU LOST!</h1>
     <h2 id="reveal-word"></h2>
@@ -41,9 +63,19 @@
       <img src="assets/try-again.png" alt="try-again" class="modal-img">
     </button>
   </div>
+
+  <!-- OVERLAY -->
   <div class="overlay hidden"></div>
+
+  <!-- CONFETTI -->
+  <div class="confetti-container hidden"></div>
+
+  <!-- SPELLING DICTIONARY -->
   <script src="typo/typo.js"></script>
+
+  <!-- JS SCRIPT -->
   <script type="module" src="js/game.js"></script>
+  
 </body>
 </html>
 

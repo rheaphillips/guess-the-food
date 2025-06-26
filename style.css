@@ -1,16 +1,24 @@
 /* || GENERAL STYLES */
+
 body {
+  /* BACKGROUND IMAGE SETTINGS */
   background-size: auto 100vh;
   background-attachment: fixed;
   background-position: center;
+
+  /* FONT APPEARANCE */
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  margin: 0;
-  padding: 2rem;
   color: #333;
+
+  /* SCROLL BAR SETTINGS */
   overflow: auto;
   overflow-y: hidden;
+
+  /* HORIZONTAL AND VERTICAL CENTERING */
+  height: 100vh;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
 }
 
@@ -24,11 +32,11 @@ body {
 }
 
 h1 {
-  font-size: 25px;
+  font-size: 20px;
 }
 
 h2 {
-  font-size: 20px;
+  font-size: 15px;
 }
 
 h2, p, li {
@@ -37,6 +45,45 @@ h2, p, li {
 
 li, p {
   font-size: 15px;
+}
+
+/* || NAVIGATION */
+
+nav {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 50px;
+}
+
+.navbar {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 50px;
+  height: 100vh;
+  overflow: hidden;
+  background-color: white;
+  float: right;
+}
+
+.navbar li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.navbar li a img {
+  transition: transform 0.2s ease;
+  padding: 10px;
+  width: 30px;
+  height: 30px;
+}
+
+.navbar li a img:hover {
+  transform: scale(1.2);
+  cursor: pointer;
 }
 
 /* || BUTTONS */
@@ -51,9 +98,12 @@ li, p {
 
 .button {
   display: flex;
+  border: none;
+  padding: 0;
+  cursor: pointer;
   border-radius: 8px;
-  transition: transform 0.2s;
-  border: 0;
+  transition: transform 0.2s ease;
+  border: none;
 }
 
 .button:hover {
@@ -80,34 +130,25 @@ li, p {
   background-image: url('assets/instructions-hover.png');
 }
 
-.help-button {
-  position: fixed;
-  margin-left: 900px;
-  width: 75px;
-  height: 75px;
-}
-
 /* || GRID */
 
 .grid {
-  position: absolute;
-  margin: 50px auto;
   display: grid;
   grid-template-rows: repeat(6, 50px);
-  gap: 5px; 
+  margin-bottom: 20px;
 }
 
 .box {
   display: flex;
   align-items: center;
   justify-content: center;
-  user-select: none;
+  margin: 2px;
 }
 
 .text-box {
   background-color: #fff;
   border: 2px solid #dcdcdc;
-  font-size: 1.5rem;
+  font-size: 25px;
   font-weight: bold;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
   border-radius: 10px;
@@ -137,40 +178,19 @@ li, p {
   border: none;
 }
 
-/* Animation */
-@keyframes flip {
-  0% {
-    transform: rotateX(0);
-  }
-  50% {
-    transform: rotateX(90deg);
-  }
-  100% {
-    transform: rotateX(0deg);
-  }
-}
-
-.box.flip {
-  animation: flip 0.6s ease-in-out;
-}
-
 /* || KEYBOARD */
-
-.keyboard {
-  margin-top: 390px;
-}
 
 .keyboard-row {
   display: flex;
-  margin: 5px auto;
   justify-content: center;
 }
-
+  
 .key {
   width: fit-content;
-  padding: 15px;
-  height: 15px;
-  margin: 2px;
+  min-width: 27px;
+  height: 27px;
+  padding: 10px;
+  margin: 3px;
   border: none;
 }
 
