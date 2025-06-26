@@ -184,7 +184,7 @@ const evalKey = function (key) {
         state = 'correct';
         numOfCorrectLetters++;
       } 
-      else if (chosen.includes(letter) && !chosen.split('').some((cur, i) => cur == letter && entered[i] == letter)) state = 'present';
+      else if (chosen.includes(letter) && !entered.split('').some((cur, j) => cur == letter && (j < i || chosen[j] == letter))) state = 'present';
       else state = 'absent';
 
       if (state == 'correct' || !(letterStates[letter] == 'correct'|| letterStates[letter] == 'present')) letterStates[letter] = state;
