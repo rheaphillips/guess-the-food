@@ -15,11 +15,11 @@ body {
 }
 
 .home {
-  background-image: url('images/background.png');  
+  background-image: url('assets/background.png');  
 }
 
 .game {
-  background-image: url('images/background-game.png');
+  background-image: url('assets/background-game.png');
   background-color: rgba(0,0,0,0.5);
 }
 
@@ -66,18 +66,18 @@ li, p {
 }
 
 .play-button img:hover {
-  content: url('images/play-hover.png');
+  content: url('assets/play-hover.png');
 }
 
 .instructions-button {
-  background-image: url(images/instructions.png);
+  background-image: url('assets/instructions.png');
   background-size: 100%;
   width: 278.14px;
   height: 60px;
 }
 
 .instructions-button:hover {
-  background-image: url(images/instructions-hover.png);
+  background-image: url('assets/instructions-hover.png');
 }
 
 .help-button {
@@ -276,12 +276,12 @@ li, p {
 
 .play-again img:hover {
   transform: scale(1.05);
-  content: url('images/play-again-hover.png');
+  content: url('assets/play-again-hover.png');
 }
 
 .play-again-lose img:hover {
   transform: scale(1.05);
-  content: url('images/try-again-hover.png');
+  content: url('assets/try-again-hover.png');
 }
 
 .hidden {
