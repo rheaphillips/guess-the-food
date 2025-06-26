@@ -1,6 +1,6 @@
 /* || GENERAL STYLES */
 body {
-  background-size: 1300px;
+  background-size: auto 100vh;
   background-attachment: fixed;
   background-position: center;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -23,22 +23,30 @@ body {
   background-color: rgba(0,0,0,0.5);
 }
 
+h1 {
+  font-size: 25px;
+}
+
+h2 {
+  font-size: 20px;
+}
+
 h2, p, li {
   text-align: left;
 }
 
 li, p {
-  font-size: 20px;
+  font-size: 15px;
 }
 
 /* || BUTTONS */
 
 .buttons {
-  margin: 575px auto;
+  margin: 375px auto;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
-  max-width: 600px;
+  max-width: 450px;
 }
 
 .button {
@@ -53,8 +61,8 @@ li, p {
 }
 
 .play-button img {
-  width: 160px;
-  height: 80px;
+  width: 120px;
+  height: 60px;
 }
 
 .play-button img:hover {
@@ -64,8 +72,8 @@ li, p {
 .instructions-button {
   background-image: url(images/instructions.png);
   background-size: 100%;
-  width: 370.85px;
-  height: 80px;
+  width: 278.14px;
+  height: 60px;
 }
 
 .instructions-button:hover {
@@ -83,9 +91,9 @@ li, p {
 
 .grid {
   position: absolute;
-  margin: 110px auto;
+  margin: 50px auto;
   display: grid;
-  grid-template-rows: repeat(6, 75px);
+  grid-template-rows: repeat(6, 50px);
   gap: 5px; 
 }
 
@@ -99,7 +107,7 @@ li, p {
 .text-box {
   background-color: #fff;
   border: 2px solid #dcdcdc;
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: bold;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
   border-radius: 10px;
@@ -149,25 +157,23 @@ li, p {
 /* || KEYBOARD */
 
 .keyboard {
-  margin-top: 610px;
+  margin-top: 390px;
 }
 
 .keyboard-row {
   display: flex;
-  margin: 10px auto;
+  margin: 5px auto;
   justify-content: center;
 }
 
 .key {
   width: fit-content;
-  padding: 20px;
-  margin: 1px;
-  height: 30px;
+  padding: 15px;
+  height: 15px;
 }
 
 .key:hover {
-  background: #ccc;
-  border-color: #a8a7a7;
+  background: #afafaf;
 }
 
 /* || CONFETTI */
@@ -250,10 +256,9 @@ li, p {
 
 .modal-img {
   display: block;
-  width: fit-content;
   border: none;
   margin: 0;
-  height: 60px;
+  height: 40px;
   border-radius: 8px;
   transition: transform 0.2s;
 }
@@ -262,7 +267,7 @@ li, p {
   position: absolute;
   top: 1.2rem;
   right: 2rem;
-  font-size: 3rem;
+  font-size: 2rem;
   color: #333;
   cursor: pointer;
   border: none;
