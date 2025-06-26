@@ -39,6 +39,10 @@ h2 {
   font-size: 15px;
 }
 
+ul {
+  margin-left: -25px;
+}
+
 h2, p, li {
   text-align: left;
 }
@@ -94,7 +98,7 @@ nav {
 /* || BUTTONS */
 
 .buttons {
-  margin: 375px auto;
+  margin-top: 175px;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
@@ -102,13 +106,11 @@ nav {
 }
 
 .button {
-  display: flex;
   border: none;
   padding: 0;
   cursor: pointer;
   border-radius: 8px;
   transition: transform 0.2s ease;
-  border: none;
 }
 
 .button:hover {
