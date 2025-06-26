@@ -170,6 +170,8 @@ li, p {
   width: fit-content;
   padding: 15px;
   height: 15px;
+  margin: 2px;
+  border: none;
 }
 
 .key:hover {
