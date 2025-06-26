@@ -74,14 +74,19 @@ nav {
   justify-content: center;
 }
 
-.navbar li a img {
+.nav-btn {
+  border: none;
+  background-color: white;
+}
+
+.nav-btn img {
   transition: transform 0.2s ease;
   padding: 10px;
   width: 30px;
   height: 30px;
 }
 
-.navbar li a img:hover {
+.nav-btn img:hover {
   transform: scale(1.2);
   cursor: pointer;
 }

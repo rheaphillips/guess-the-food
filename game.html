@@ -12,18 +12,18 @@
   <!-- NAVIGATION BAR -->
   <nav>
     <ul class = "navbar">
-      <li><a class="active" href="index.html">
+      <li><a class="nav-btn home-button" href="index.html">
         <img src="assets/home.png" alt="home">
       </a></li>
-      <li><a href="#">
+      <li><button class="nav-btn help-button">
         <img src="assets/help.png" alt="help">
-      </a></li>
-      <li><a href="#">
+      </button></li>
+      <li><button class="nav-btn hint-button">
         <img src="assets/hint.png" alt="hint">
-      </a></li>
-      <li><a href="#">
+      </button></li>
+      <li><button class="nav-btn restart-button">
         <img src="assets/restart.png" alt="restart">
-      </a></li>
+      </button></li>
     </ul>
   </nav>
 
@@ -32,22 +32,7 @@
   <div class="keyboard"></div>
 
   <!-- MODALS -->
-  <div class="modal help-modal hidden">
-    <button class="close-modal">&times;</button>
-    <h1>Instructions</h1>
-    <h2>Guess the food item in 6 tries!</h2>
-    <ul>
-      <li>Each guess must be a valid food item with the correct length</li>
-      <li>After entering each word, the colour of the tiles change to reveal how close your guess was to the word</li>
-    </ul>
-    <h2>Examples</h2>
-    <img src="assets/instructions-1.png" alt="correct letter" class="modal-img">
-    <p>A is in the word and in the correct spot</p>
-    <img src="assets/instructions-2.png" alt="present letter" class="modal-img">
-    <p>D is in the word but in the wrong spot.</p>
-    <img src="assets/instructions-3.png" alt="absent letter" class="modal-img">
-    <p>T is not in the word in any spot.</p>
-  </div>
+  <div class="modal help-modal hidden"></div>
 
   <div class="modal win-modal hidden">
     <h1>🎉 YOU WON!</h1>
@@ -73,8 +58,9 @@
   <!-- SPELLING DICTIONARY -->
   <script src="typo/typo.js"></script>
 
-  <!-- JS SCRIPT -->
-  <script type="module" src="js/game.js"></script>
+  <!-- JS SCRIPTS -->
+  <script type="module" src="js/help.js"></script>
+  <script type="module" src="js/gamePage.js"></script>
   
 </body>
 </html>
