@@ -195,6 +195,11 @@ const evalKey = function (key) {
       letterNum++;
       words[wordNum][letterNum].classList.add('active');
     } 
+    if (revealedLetters.has(letterNum) && alphabet.includes(words[wordNum][letterNum].innerHTML)) {
+      words[wordNum][letterNum].classList.remove('active');
+      letterNum++;
+      words[wordNum][letterNum].classList.add('active');
+    }
   }
 
   if (validEntry(key)) {
