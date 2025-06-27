@@ -2,17 +2,16 @@ export function createHelpModal() {
   const html = `
   <button class="close-modal">&times;</button>
   <h1>Instructions</h1>
-  <h2>Guess the food item in 6 tries!</h2>
+  <h2>Guess the 5-letter food item in 6 tries!</h2>
   <ul>
-    <li>The food item can be 4, 5 or 6 letters long</li>
-    <li>Each guess must be a valid food item with the correct length</li>
+    <li>Each guess must be a valid food item that is 5 letters long</li>
     <li>After entering each word, the colour of the tiles change to reveal how close your guess was to the word</li>
   </ul>
   <h2>Examples</h2>
   <img src="assets/instructions-1.png" alt="correct letter" class="modal-img">
-  <p>A is in the word and in the correct spot</p>
+  <p>I is in the word and in the correct spot</p>
   <img src="assets/instructions-2.png" alt="present letter" class="modal-img">
-  <p>K is in the word but in the wrong spot.</p>
+  <p>U is in the word but in the wrong spot.</p>
   <img src="assets/instructions-3.png" alt="absent letter" class="modal-img">
   <p>T is not in the word in any spot.</p>`;
 
