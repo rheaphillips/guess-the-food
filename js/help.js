@@ -12,7 +12,7 @@ export function createHelpModal() {
   <img src="assets/instructions-1.png" alt="correct letter" class="modal-img">
   <p>A is in the word and in the correct spot</p>
   <img src="assets/instructions-2.png" alt="present letter" class="modal-img">
-  <p>D is in the word but in the wrong spot.</p>
+  <p>K is in the word but in the wrong spot.</p>
   <img src="assets/instructions-3.png" alt="absent letter" class="modal-img">
   <p>T is not in the word in any spot.</p>`;
 
