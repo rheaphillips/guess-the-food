@@ -167,6 +167,10 @@ nav {
   cursor: pointer;
 }
 
+.text-box.active {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
 .text-box.correct {
   background-color: #338475; /* Green */
   color: white;

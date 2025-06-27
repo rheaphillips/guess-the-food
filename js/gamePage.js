@@ -110,6 +110,7 @@ const createBoxes = function () {
     }
     words.push(word);
   }
+  words[0][0].classList.add('active');
 }
 
 const createEventListeners = function () {
@@ -163,7 +164,7 @@ const updateLetterColor = function (state, letter, i, letterStates) {
   accessKey(letter)?.classList.add(letterStates[letter]);
 }  
 
-const validEntry = (key) => key == "ENTER" && words[wordNum].every((letter) => letter.innerHTML) && (entered.join('') === chosen.join('') || groceryWords.includes(entered.join('').toLowerCase()) || entered.every((word) => dictionary.check(word)));
+const validEntry = (key) => key == "ENTER" && words[wordNum].every((letter) => alphabet.includes(letter.innerHTML) || letter.innerHTML == ' ') && (entered.join('') === chosen.join('') || groceryWords.includes(entered.join('').toLowerCase()) || entered.every((word) => dictionary.check(word)));
 
 const win = function () {
   confetti();
@@ -185,9 +186,15 @@ const evalKey = function (key) {
     if (revealedLetters.has(letterNum)) chosen[letterNum] == key ? curLetter.classList.add('correct') : curLetter.classList.remove('correct');
     curLetter.innerHTML = key;
     entered[letterNum] = key;
+    words[wordNum][letterNum].classList.remove('active');
+    if (letterNum < chosen.length - 1) words[wordNum][letterNum + 1].classList.add('active');
     letterNum++;
     if (letterStates[key] == 'absent') curLetter.classList.add('absent');
-    if (chosen[letterNum] == ' ') letterNum++;
+    if (chosen[letterNum] == ' ') {
+      words[wordNum][letterNum].innerHTML = ' ';
+      letterNum++;
+      words[wordNum][letterNum].classList.add('active');
+    } 
   }
 
   if (validEntry(key)) {
@@ -211,11 +218,18 @@ const evalKey = function (key) {
 
     resetRow();
     wordNum++;
+    words[wordNum][letterNum].classList.add('active');
   }
 
   if (key == "BACKSPACE" && letterNum > 0) {
+    if (letterNum < chosen.length) words[wordNum][letterNum].classList.remove('active');
+    words[wordNum][letterNum - 1].classList.add('active');
     letterNum--;
-    if (chosen[letterNum] == ' ') letterNum--;
+    if (chosen[letterNum] == ' ') {
+      letterNum--;
+      words[wordNum][letterNum].classList.remove('active');
+      words[wordNum][letterNum].classList.add('active');
+    } 
     entered[letterNum] = '';
     curLetter = words[wordNum][letterNum];
     if (letterStates[curLetter.innerHTML] == 'correct') curLetter.classList.remove('correct');
