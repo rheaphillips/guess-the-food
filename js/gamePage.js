@@ -85,6 +85,11 @@ const giveHint = function () {
     letterStates[chosen[index]] = 'correct';
     updateLetterColor('correct', chosen[index], index, letterStates);
     if (entered.join('') === chosen.join('')) win(); 
+    while (revealedLetters.has(letterNum) && alphabet.includes(words[wordNum][letterNum].innerHTML)) {
+      words[wordNum][letterNum].classList.remove('active');
+      letterNum++;
+      words[wordNum][letterNum].classList.add('active');
+    }
   }
 }
 
