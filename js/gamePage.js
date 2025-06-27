@@ -1,6 +1,6 @@
 let groceryWords = ["apple", "grape", "peach", "mango", "lemon", "onion", "beans", "chard", "bacon", "steak", "roast", "cream", "gouda", "bread", "bagel", "pasta", "penne", "ramen", "flour", "sugar", "honey", "cumin", "thyme", "basil", "jelly", "yeast", "cocoa", "chips", "candy", "dates", "sushi", "juice", "broth", "stock", "mochi", "salsa", "pesto", "gravy", "decaf", "latte", "mirin", "guava", "pizza", "toast", "pears", "olive", "salad", "berry", "sauce", "spice", "wafer", "hazel", "curry", "cider", "tacos", "water", "melon", "tomat", "beets", "radic", "leeks", "mints", "herbs", "quail", "crabs", "donut", "wheat", "fries", "cacao", "fudge", "icing", "scone", "pecan", "jamon", "kebab", "pique", "rumba", "leche", "torta", "arepa", "choco", "stout", "lager", "wings", "nacho", "quark", "tofur", "vegan", "thane", "garli", "chive", "scall", "pound", "flank", "shiit", "clams", "quino", "fruit", "crepe", "seeds", "pitas", "tarts", "prune", "mocha", "syrup", "ponzu", "achar", "ample", "bhaji", "bhelp", "bison", "clove", "dashi", "dhokl", "edoma", "eggos", "elote", "falaf", "flaky", "hakka", "halwa", "idlis", "inari", "jambu", "jerky", "jollo", "kalak", "kheer", "kraut", "ladoo", "lassi", "maida", "maple", "methi", "naano", "nashi", "niter", "nutty", "oishi", "okras", "plums", "prawn", "qeema", "qorma", "raita", "ricey", "rolls", "samos", "sweet", "tater", "tikka", "torte", "udons", "umami", "uppma", "urdal", "vadas", "veggy", "venal", "wafle", "wraps", "xigua", "yabby", "yiros", "yogur", "zatar", "zesty", "zoppa", "zuppa"];
 
-let classes = ['grid', 'confetti-container', 'overlay', 'win-modal', 'lose-modal', 'keyboard', 'play-again', 'play-again-lose', 'hint-button', 'restart-button'], elems = {}, states = ['correct', 'present', 'absent'];
+let classes = ['grid', 'confetti-container', 'overlay', 'win-modal', 'lose-modal', 'keyboard', 'play-again', 'play-again-lose', 'hint-button', 'hint-image', 'restart-button'], elems = {}, states = ['correct', 'present', 'absent'];
 
 const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split(''), keyLayout = [['Q','W','E','R','T','Y','U','I','O','P'], ['A','S','D','F','G','H','J','K','L'], ['Enter','Z','X','C','V','B','N','M','Backspace']];
 
@@ -57,6 +57,7 @@ const resetGlobalVars = function () {
   revealedLetters.clear();
   resetRow();
   elems.confettiContainer.innerHTML = '';
+  elems.hintImage.src = `./assets/hint-${numOfHints}.png`;
 }
 
 const accessKey = (letter) => document.querySelector(`[data-key="${letter}"]`);
@@ -84,6 +85,7 @@ const giveHint = function () {
     words[wordNum][index].innerHTML = chosen[index];
     letterStates[chosen[index]] = 'correct';
     updateLetterColor('correct', chosen[index], index, letterStates);
+    elems.hintImage.src = `./assets/hint-${numOfHints}.png`;
     if (entered.join('') === chosen.join('')) win(); 
     while (revealedLetters.has(letterNum) && alphabet.includes(words[wordNum][letterNum].innerHTML)) {
       words[wordNum][letterNum].classList.remove('active');
