@@ -5,7 +5,7 @@ let classes = ['grid', 'confetti-container', 'overlay', 'win-modal', 'lose-modal
 const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split(''), keyLayout = [['Q','W','E','R','T','Y','U','I','O','P'], ['A','S','D','F','G','H','J','K','L'], ['Enter','Z','X','C','V','B','N','M','Backspace']];
 
 let affData, dicData, dictionary;
-let words, wordNum, letterNum, numOfCorrectLetters, chosen, entered, letterStates = {}, revealedLetters = new Set([]);
+let words, wordNum, letterNum, numOfCorrectLetters, chosen, entered, numOfHints, letterStates = {}, revealedLetters = new Set([]);
 
 import * as help from './help.js';
 
@@ -52,6 +52,7 @@ const resetGlobalVars = function () {
   words = [];
   wordNum = 0;
   chosen = [];
+  numOfHints = 3;
   letterStates = {};
   revealedLetters.clear();
   resetRow();
@@ -71,7 +72,8 @@ const randomizeWord = function () {
 }
 
 const giveHint = function () {
-  if (revealedLetters.size < chosen.length) {
+  if (revealedLetters.size < chosen.length && numOfHints > 0) {
+    numOfHints--;
     let index;
     do {
       index = Math.round(Math.random()*(chosen.length - 1));
