@@ -4,6 +4,7 @@ export function createHelpModal() {
   <h1>Instructions</h1>
   <h2>Guess the food item in 6 tries!</h2>
   <ul>
+    <li>The food item can be 4, 5 or 6 letters long</li>
     <li>Each guess must be a valid food item with the correct length</li>
     <li>After entering each word, the colour of the tiles change to reveal how close your guess was to the word</li>
   </ul>
