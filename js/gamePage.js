@@ -66,6 +66,7 @@ const randomizeWord = function () {
   [chosen] = groceryWords.splice(Math.round(Math.random()*(groceryWords.length - 1)), 1);
   chosen = chosen.toUpperCase().split('');
   entered = chosen.map((elem) => elem == ' ' ? ' ' : '');
+  chosen.forEach((elem, i) => {if (elem == ' ') revealedLetters.add(i)});
   console.log('New word:', chosen);
 }
 
@@ -162,7 +163,7 @@ const updateLetterColor = function (state, letter, i, letterStates) {
   accessKey(letter)?.classList.add(letterStates[letter]);
 }  
 
-const validEntry = (key) => key == "ENTER" && letterNum == chosen.length && (entered.join('') === chosen.join('') || groceryWords.includes(entered.join('').toLowerCase()) || entered.reduce((acc, word) => acc && dictionary.check(word), true));
+const validEntry = (key) => key == "ENTER" && words[wordNum].every((letter) => letter.innerHTML) && (entered.join('') === chosen.join('') || groceryWords.includes(entered.join('').toLowerCase()) || entered.every((word) => dictionary.check(word)));
 
 const win = function () {
   confetti();
@@ -181,7 +182,7 @@ const evalKey = function (key) {
   let curLetter = words[wordNum][letterNum];
 
   if (letterNum < chosen.length && alphabet.includes(key)) {
-    if (letterStates[curLetter.innerHTML] == 'correct'  && curLetter.innerHTML != key) curLetter.classList.remove('correct');
+    if (revealedLetters.has(letterNum)) chosen[letterNum] == key ? curLetter.classList.add('correct') : curLetter.classList.remove('correct');
     curLetter.innerHTML = key;
     entered[letterNum] = key;
     letterNum++;
