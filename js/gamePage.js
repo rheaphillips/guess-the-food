@@ -2,10 +2,10 @@ const groceryWords = ["apple", "banana", "orange", "grape", "pear", "peach", "pl
 
 let classes = ['grid', 'confetti-container', 'overlay', 'win-modal', 'lose-modal', 'keyboard', 'play-again', 'play-again-lose', 'hint-button', 'restart-button'], elems = {}, states = ['correct', 'present', 'absent'];
 
-const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split(''), keyLayout = [['Q','W','E','R','T','Y','U','I','O','P'], ['A','S','D','F','G','H','J','K','L'], ['Enter','Z','X','C','V','B','N','M','Backspace']];;
+const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split(''), keyLayout = [['Q','W','E','R','T','Y','U','I','O','P'], ['A','S','D','F','G','H','J','K','L'], ['Enter','Z','X','C','V','B','N','M','Backspace']];
 
 let affData, dicData, dictionary;
-let words, wordNum, numOfCorrectLetters, chosen, entered, letterStates = {};
+let words, wordNum, letterNum, numOfCorrectLetters, chosen, entered, letterStates = {}, revealedLetters = new Set([]);
 
 import * as help from './help.js';
 
@@ -44,28 +44,45 @@ const createKeyboard = function () {
 
 const resetRow = function () {
   numOfCorrectLetters = 0;
-  entered = '';
+  letterNum = 0;
+  entered = chosen.map((elem) => elem == ' ' ? ' ' : '');
 }
 
 const resetGlobalVars = function () {
   words = [];
   wordNum = 0;
-  chosen = '';
+  chosen = [];
   letterStates = {};
+  revealedLetters.clear();
   resetRow();
   elems.confettiContainer.innerHTML = '';
 }
 
 const accessKey = (letter) => document.querySelector(`[data-key="${letter}"]`);
 
-const clearKeyboard = function () {
-  alphabet.forEach((letter) => states.forEach((cls) => accessKey(letter).classList.remove(cls)));
-}
+const clearKeyboard = () => alphabet.forEach((letter) => states.forEach((cls) => accessKey(letter).classList.remove(cls)));
 
 const randomizeWord = function () {
   [chosen] = groceryWords.splice(Math.round(Math.random()*(groceryWords.length - 1)), 1);
-  chosen = chosen.toUpperCase();
+  chosen = chosen.toUpperCase().split('');
+  entered = chosen.map((elem) => elem == ' ' ? ' ' : '');
   console.log('New word:', chosen);
+}
+
+const giveHint = function () {
+  if (revealedLetters.size < chosen.length) {
+    let index;
+    do {
+      index = Math.round(Math.random()*(chosen.length - 1));
+    } while (revealedLetters.has(index) || chosen[index] == ' ')
+    revealedLetters.add(index);
+    numOfCorrectLetters++;
+    entered[index] = chosen[index];
+    words[wordNum][index].innerHTML = chosen[index];
+    letterStates[chosen[index]] = 'correct';
+    updateLetterColor('correct', chosen[index], index, letterStates);
+    if (entered.join('') === chosen.join('')) win(); 
+  }
 }
 
 const hideModals = function () {
@@ -99,7 +116,14 @@ const createEventListeners = function () {
   elems.keyboard.addEventListener('click', e => !e.target.classList.contains('key') || evalKey(e.target.getAttribute('data-key').toUpperCase()));
   [elems.playAgain, elems.playAgainLose].forEach(elem => elem.addEventListener('click', reset));
   help.helpModalEventListeners();
-  elems.restartButton.addEventListener('click', reset);
+  elems.restartButton.addEventListener('click', function () {
+    this.blur();
+    reset();
+  });
+  elems.hintButton.addEventListener('click', function () {
+    this.blur();
+    giveHint();
+  });
 }
 
 const reset = function () {
@@ -138,7 +162,7 @@ const updateLetterColor = function (state, letter, i, letterStates) {
   accessKey(letter)?.classList.add(letterStates[letter]);
 }  
 
-const validEntry = (key) => key == "ENTER" && entered.length == chosen.length && (entered === chosen || groceryWords.includes(entered.toLowerCase()) || entered.split(' ').reduce((acc, word) => acc && dictionary.check(word), true));
+const validEntry = (key) => key == "ENTER" && letterNum == chosen.length && (entered.join('') === chosen.join('') || groceryWords.includes(entered.join('').toLowerCase()) || entered.reduce((acc, word) => acc && dictionary.check(word), true));
 
 const win = function () {
   confetti();
@@ -154,23 +178,26 @@ const lose = function () {
 
 const evalKey = function (key) {
 
-  let curLetter = words[wordNum][entered.length];
+  let curLetter = words[wordNum][letterNum];
 
-  if (entered.length < chosen.length && alphabet.includes(key)) {
+  if (letterNum < chosen.length && alphabet.includes(key)) {
+    if (letterStates[curLetter.innerHTML] == 'correct'  && curLetter.innerHTML != key) curLetter.classList.remove('correct');
     curLetter.innerHTML = key;
-    entered = entered + key;
+    entered[letterNum] = key;
+    letterNum++;
     if (letterStates[key] == 'absent') curLetter.classList.add('absent');
-    if (chosen[entered.length] == ' ') entered = entered + ' '; 
+    if (chosen[letterNum] == ' ') letterNum++;
   }
 
   if (validEntry(key)) {
-    entered.split('').forEach((letter, i) => {
+    entered.forEach((letter, i) => {
       let state = null;
       if (letter == chosen[i]) {
         state = 'correct';
         numOfCorrectLetters++;
+        revealedLetters.add(i);
       } 
-      else if (chosen.includes(letter) && !entered.split('').some((cur, j) => cur == letter && (j < i || chosen[j] == letter))) state = 'present';
+      else if (chosen.includes(letter) && !entered.some((cur, j) => cur == letter && (j < i || chosen[j] == letter))) state = 'present';
       else state = 'absent';
 
       if (state == 'correct' || !(letterStates[letter] == 'correct'|| letterStates[letter] == 'present')) letterStates[letter] = state;
@@ -178,17 +205,19 @@ const evalKey = function (key) {
 
     });
 
-    if (entered === chosen) win();
+    if (entered.join('') === chosen.join('')) win();
     else if (wordNum === 5) lose();
 
     resetRow();
     wordNum++;
   }
 
-  if (key == "BACKSPACE" && entered.length > 0) {
-    entered = entered.slice(0, -1);
-    if (chosen[entered.length - 1] == ' ') entered = entered.slice(0, -1);
-    curLetter = words[wordNum][entered.length];
+  if (key == "BACKSPACE" && letterNum > 0) {
+    letterNum--;
+    if (chosen[letterNum] == ' ') letterNum--;
+    entered[letterNum] = '';
+    curLetter = words[wordNum][letterNum];
+    if (letterStates[curLetter.innerHTML] == 'correct') curLetter.classList.remove('correct');
     if (letterStates[curLetter.innerHTML] == 'absent') curLetter.classList.remove('absent');
     curLetter.innerHTML = '';
   }
