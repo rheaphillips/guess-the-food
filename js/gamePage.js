@@ -182,7 +182,7 @@ const win = function () {
 }
 
 const lose = function () {
-  document.getElementById('reveal-word').textContent = `Word: ${chosen}`;
+  document.getElementById('reveal-word').textContent = `Word: ${chosen.join('')}`;
   elems.overlay.classList.remove('hidden');
   elems.loseModal.classList.remove('hidden');
 }

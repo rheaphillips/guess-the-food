@@ -354,3 +354,7 @@ nav {
 .hidden {
   display: none;
 }
+
+#reveal-word {
+  text-align: center;
+}
