@@ -293,22 +293,27 @@ nav {
   background-color: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(3px);
   z-index: 5;
-  overflow: hidden;
 }
 
 .modal {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: fit-content;
-  max-width: 600px;
-  padding: 2rem 3rem;
+  transform: translate(-50%, -50%);
+  width: 70vw;
+  max-width: 400px;
+  padding: 30px;
   border-radius: 10px;
   background-color: white;
-  transform: translate(-50%, -50%);
   text-align: center;
   box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.3);
   z-index: 10;
+}
+
+.help-modal {
+  height: 70vh;
+  overflow: scroll;
+  width: 70vw;
 }
 
 .modal h1 {
