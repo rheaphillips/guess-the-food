@@ -311,7 +311,8 @@ nav {
 }
 
 .help-modal {
-  height: 70vh;
+  height: fit-content;
+  max-height: 70vh;
   overflow: scroll;
   width: 70vw;
 }
@@ -337,8 +338,8 @@ nav {
 
 .close-modal {
   position: absolute;
-  top: 20px;
-  right: 20px;
+  top: 10px;
+  right: 10px;
   font-size: 30px;
   color: #333;
   cursor: pointer;
