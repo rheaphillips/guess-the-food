@@ -337,9 +337,9 @@ nav {
 
 .close-modal {
   position: absolute;
-  top: 1.2rem;
-  right: 2rem;
-  font-size: 2rem;
+  top: 20px;
+  right: 20px;
+  font-size: 30px;
   color: #333;
   cursor: pointer;
   border: none;
