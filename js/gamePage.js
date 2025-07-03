@@ -1,6 +1,6 @@
 let groceryWords = ["apple", "grape", "peach", "mango", "lemon", "onion", "beans", "chard", "bacon", "steak", "roast", "cream", "gouda", "bread", "bagel", "pasta", "penne", "ramen", "flour", "sugar", "honey", "cumin", "thyme", "basil", "jelly", "yeast", "cocoa", "chips", "candy", "dates", "sushi", "juice", "broth", "stock", "mochi", "salsa", "pesto", "gravy", "decaf", "latte", "oreos", "guava", "pizza", "toast", "pears", "olive", "salad", "berry", "sauce", "spice", "wafer", "hazel", "curry", "cider", "tacos", "water", "melon", "limes", "beets", "snail", "leeks", "mints", "herbs", "grits", "crabs", "donut", "wheat", "fries", "cacao", "fudge", "icing", "scone", "pecan", "cakes", "kebab", "wings", "nacho", "chive", "dairy", "clams", "fruit", "crepe", "seeds", "pitas", "tarts", "prune", "mocha", "syrup", "ranch", "clove", "eggos", "okras", "plums", "prawn", "rolls", "tikka", "penne", "squid", "wraps", "tapas", "jello", "trout", "grain", "meats", "humus", "saute"];
 
-let classes = ['grid', 'confetti-container', 'overlay', 'win-modal', 'lose-modal', 'keyboard', 'play-again', 'play-again-lose', 'hint-button', 'hint-image', 'restart-button'], elems = {}, states = ['correct', 'present', 'absent'];
+let classes = ['grid', 'confetti-container', 'overlay', 'win-modal', 'lose-modal', 'keyboard', 'play-again', 'play-again-lose', 'hint-button', 'hint-image', 'restart-button'], elems = {}, colourStates = ['correct', 'present', 'absent'];
 
 const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split(''), keyLayout = [['Q','W','E','R','T','Y','U','I','O','P'], ['A','S','D','F','G','H','J','K','L'], ['Enter','Z','X','C','V','B','N','M','Backspace']];
 
@@ -62,7 +62,7 @@ const resetGlobalVars = function () {
 
 const accessKey = (letter) => document.querySelector(`[data-key="${letter}"]`);
 
-const clearKeyboard = () => alphabet.forEach((letter) => states.forEach((cls) => accessKey(letter).classList.remove(cls)));
+const clearKeyboard = () => alphabet.forEach((letter) => colourStates.forEach((cls) => accessKey(letter).classList.remove(cls)));
 
 const randomizeWord = function () {
   [chosen] = groceryWords.splice(Math.round(Math.random()*(groceryWords.length - 1)), 1);
@@ -167,24 +167,39 @@ const confetti = function () {
   }
 }
 
-const updateLetterColor = function (state, letter, i, letterStates) {
-  words[wordNum][i].classList.add(state);
-  accessKey(letter)?.classList.remove(...states);
-  accessKey(letter)?.classList.add(letterStates[letter]);
-}  
-
 const validEntry = (key) => key == "ENTER" && words[wordNum].every((letter) => alphabet.includes(letter.innerHTML) || letter.innerHTML == ' ') && (entered.join('') === chosen.join('') || groceryWords.includes(entered.join('').toLowerCase()) || entered.every((word) => dictionary.check(word)));
 
 const win = function () {
-  confetti();
-  elems.overlay.classList.remove('hidden');
-  elems.winModal.classList.remove('hidden');
+  setTimeout(() => {
+    confetti();
+    elems.overlay.classList.remove('hidden');
+    elems.winModal.classList.remove('hidden');
+  }, 1800);
 }
 
 const lose = function () {
-  document.getElementById('reveal-word').textContent = `Word: ${chosen.join('')}`;
-  elems.overlay.classList.remove('hidden');
-  elems.loseModal.classList.remove('hidden');
+  setTimeout(() => {
+    document.getElementById('reveal-word').textContent = `Word: ${chosen.join('')}`;
+    elems.overlay.classList.remove('hidden');
+    elems.loseModal.classList.remove('hidden');
+  }, 1800);
+}
+
+const updateLetterColor = function (state, letter, wordNum, i) {
+  words[wordNum][i].classList.add(state);
+  accessKey(letter)?.classList.remove(...colourStates);
+  accessKey(letter)?.classList.add(letterStates[letter]);
+}
+
+const revealColours = function (wordNum, states) {
+  words[wordNum].forEach((letter, i) => {
+    setTimeout(() => {
+      letter.classList.add('flip');
+      setTimeout(() => {
+        updateLetterColor(states[i], letter.innerHTML, wordNum, i);
+      }, 300);
+    }, i * 300);
+  });
 }
 
 const evalKey = function (key) {
@@ -212,27 +227,28 @@ const evalKey = function (key) {
   }
 
   if (validEntry(key)) {
+    let states = [];
     entered.forEach((letter, i) => {
-      let state = null;
       if (letter == chosen[i]) {
-        state = 'correct';
+        states.push('correct');
         numOfCorrectLetters++;
         revealedLetters.add(i);
       } 
-      else if (chosen.includes(letter) && !entered.some((cur, j) => cur == letter && (j < i || chosen[j] == letter))) state = 'present';
-      else state = 'absent';
+      else if (chosen.includes(letter) && !entered.some((cur, j) => cur == letter && (j < i || chosen[j] == letter))) states.push('present');
+      else states.push('absent');
 
-      if (state == 'correct' || !(letterStates[letter] == 'correct'|| letterStates[letter] == 'present')) letterStates[letter] = state;
-      updateLetterColor(state, letter, i, letterStates);
-
+      if (states.at(-1) == 'correct' || !(letterStates[letter] == 'correct' || letterStates[letter] == 'present')) letterStates[letter] = states.at(-1);
     });
 
-    if (entered.join('') === chosen.join('')) win();
-    else if (wordNum === 5) lose();
+    revealColours(wordNum, states);
 
-    resetRow();
-    wordNum++;
-    words[wordNum][letterNum].classList.add('active');
+    if (entered.join('') === chosen.join('')) win();
+    else if (wordNum === 5) lose(); 
+    else {
+      resetRow();
+      wordNum++;
+      words[wordNum][letterNum].classList.add('active');
+    }
   }
 
   if (key == "BACKSPACE" && letterNum > 0) {

@@ -83,13 +83,12 @@ nav {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  
 }
 
 .nav-btns {
-  display: flex; /* Make it horizontal */
+  display: flex;
   flex-direction: row;
-  justify-content: flex-end; /* Align items to the right */
+  justify-content: flex-end;
   align-items: center;
 }
 
@@ -192,7 +191,8 @@ nav {
   font-weight: bold;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
   border-radius: 10px;
-  transition: transform 0.2s ease, background-color 0.3s ease
+  transition: transform 0.2s ease, background-color 0.3s ease;
+  transform-style: preserve-3d;
 }
 
 .text-box:hover {
@@ -220,6 +220,22 @@ nav {
   background-color: #4b4f54; /* Gray */
   color: white;
   border: none;
+}
+
+@keyframes flip {
+  0% {
+    transform: rotateX(0);
+  }
+  50% {
+    transform: rotateX(90deg);
+  }
+  100% {
+    transform: rotateX(0deg);
+  }
+}
+
+.box.flip {
+  animation: flip 0.6s ease-in-out;
 }
 
 /* || KEYBOARD */
@@ -313,7 +329,7 @@ nav {
 .help-modal {
   height: fit-content;
   max-height: 70vh;
-  overflow: scroll;
+  overflow-y: auto;
   width: 70vw;
 }
 
