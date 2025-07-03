@@ -35,13 +35,12 @@ const createKeyboard = function () {
         let keyElIcon = document.createElement('i');
         keyElIcon.classList.add('material-icons');
         keyElIcon.innerHTML = key;
-        keyElIcon.setAttribute('data-key', key);
         keyEl.appendChild(keyElIcon);
       }
       else {
         keyEl.innerHTML = key;
-        keyEl.setAttribute('data-key', key);
       } 
+      keyEl.setAttribute('data-key', key);
       ['box', 'text-box', 'key'].forEach((cls) => keyEl.classList.add(cls));
       rowEl.appendChild(keyEl);
     });
@@ -132,7 +131,13 @@ const createBoxes = function () {
 
 const createEventListeners = function () {
   document.addEventListener('keydown', e => evalKey(e.key.toUpperCase()));
-  elems.keyboard.addEventListener('click', e => !e.target.classList.contains('key') || evalKey(e.target.getAttribute('data-key').toUpperCase()));
+  elems.keyboard.addEventListener('click', e => {
+    if (e.target.classList.contains('key')) {
+      evalKey(e.target.getAttribute('data-key').toUpperCase());
+    } else if (e.target?.parentElement.classList.contains('key')) {
+      evalKey(e.target.parentElement.getAttribute('data-key').toUpperCase());
+    }
+  });
   [elems.playAgain, elems.playAgainLose].forEach(elem => elem.addEventListener('click', reset));
   help.helpModalEventListeners();
   elems.restartButton.addEventListener('click', function () {
