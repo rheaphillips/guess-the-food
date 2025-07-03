@@ -112,7 +112,7 @@ const giveHint = function () {
     entered[index] = chosen[index];
     words[wordNum][index].innerHTML = chosen[index];
     letterStates[chosen[index]] = 'correct';
-    updateLetterColor('correct', chosen[index], index, letterStates);
+    updateLetterColor('correct', chosen[index], wordNum, index);
     elems.hintImage.src = `./assets/hint-${numOfHints}.png`;
     if (entered.join('') === chosen.join('')) win(); 
     while (revealedLetters.has(letterNum) && alphabet.includes(words[wordNum][letterNum].innerHTML)) {
