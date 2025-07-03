@@ -158,17 +158,6 @@ nav {
   content: url('assets/instructions-hover.png');
 }
 
-@media only screen and (max-width: 800px) {
-  .home {
-    background-image: url('assets/background-phone.png');  
-  }
-  .buttons {
-    flex-direction: column;
-    margin-top: 90px;
-    gap: 5px;
-  }
-}
-
 /* || GRID */
 
 .grid {
@@ -187,7 +176,7 @@ nav {
 .text-box {
   background-color: #fff;
   border: 2px solid #dcdcdc;
-  font-size: 25px;
+  font-size: 1.5rem;
   font-weight: bold;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
   border-radius: 10px;
@@ -256,6 +245,25 @@ nav {
 
 .key:hover {
   background: #afafaf;
+}
+
+@media only screen and (max-width: 800px) {
+  .home {
+    background-image: url('assets/background-phone.png');  
+  }
+  .buttons {
+    flex-direction: column;
+    margin-top: 90px;
+    gap: 5px;
+  }
+  .key {
+    width: fit-content;
+    min-width: 1rem;
+    height: 27px;
+    padding: 0.5rem;
+    margin: 3px;
+    border: none;
+  }
 }
 
 /* || CONFETTI */
