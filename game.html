@@ -12,16 +12,16 @@
 
   <!-- NAVIGATION BAR -->
   <nav>
-    <ul class="navbar">
+    <ul class="navbar navbar-web">
       <li class="nav-item logo">
         <a type="button" href="index.html">
-          <img src="assets/logo.png" alt="Needs: Mini Game">
+          <img src="assets/logo.png" class="logo-image" alt="Needs: Mini Game">
         </a>
       </li>
       <li class="nav-item name">
         <img src="assets/name.png" alt="Guess the Food">
       </li>
-      <li class="nav-btns">
+      <li class="nav-btns nav-btns-web">
         <a type="button" class="nav-item nav-btn home-button" href="index.html">
           <img src="assets/home.png" alt="home">
         </a>
@@ -34,9 +34,44 @@
         <button type="button" class="nav-item nav-btn restart-button">
           <img src="assets/restart.png" alt="restart">
         </button>
+        <button type="button" class="nav-item nav-btn close-button hidden">
+          <img src="assets/close.png" alt="close">
+        </button>
+        <button type="button" class="nav-item nav-btn menu-button hidden">
+          <img src="assets/menu.png" alt="menu">
+        </button>
       </li>
 
     </ul>
+
+    <!-- <div class="navbar-phone">
+      <div class="nav-item name">
+        <a type="button" href="index.html">
+          <img src="assets/name.png" alt="Guess the Food">
+        </a>
+      </div>
+
+      <div class="nav-btns-phone">
+        <a type="button" class="nav-item nav-btn home-button" href="index.html">
+          <img src="assets/home.png" alt="home">
+        </a>
+        <button type="button" class="nav-item nav-btn help-button">
+          <img src="assets/help.png" alt="help">
+        </button>
+        <button type="button" class="nav-item nav-btn hint-button">
+          <img src="assets/hint-3.png" class="hint-image" alt="hint">
+        </button>
+        <button type="button" class="nav-item nav-btn restart-button">
+          <img src="assets/restart.png" alt="restart">
+        </button>
+
+      </div>
+
+      <button type="button" class="nav-item nav-btn menu-button">
+        <img src="assets/menu.png" alt="menu">
+      </button>
+    </div> -->
+
   </nav>
 
   <!-- MAIN GAME -->
@@ -73,6 +108,7 @@
   <!-- JS SCRIPTS -->
   <script type="module" src="js/help.js"></script>
   <script type="module" src="js/gamePage.js"></script>
+  <script type="module" src="js/changeView.js"></script>
   
 </body>
 </html>

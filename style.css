@@ -58,22 +58,47 @@ nav {
   top: 0;
   left: 0;
   width: 100%;
-  overflow: hidden;
+  height: 55px;
+  background-color: white; 
+  z-index: 10;
 }
 
-.navbar {
+.navbar-web {
   list-style-type: none;
-  margin: 0;
-  padding: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 45px;
-  width: 100vw;
-  background-color: white;
+  margin: 0px;
+  padding: 0px;
+}
+
+.navbar-phone {
+  position: relative;
+  margin: 0px;
+  padding: 0px;
+}
+
+.nav-btns-web {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.nav-btns-phone {
+  display: none;
 }
 
 .navbar li {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu-button {
+  position: absolute;
+  right: 0px;
+  top: 0px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -85,16 +110,11 @@ nav {
   transform: translateX(-50%);
 }
 
-.nav-btns {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  align-items: center;
-}
-
 .nav-item {
   border: none;
-  background-color: white;
+  padding: 0px;
+  margin: 0px;
+  background-color: rgb(255, 255, 255);
 }
 
 .nav-item img {
@@ -170,7 +190,7 @@ nav {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 2px;
+  margin: 1px;
 }
 
 .text-box {
@@ -178,7 +198,6 @@ nav {
   border: 2px solid #dcdcdc;
   font-size: 24px;
   font-weight: bold;
-  margin: 3px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
   border-radius: 10px;
   transition: transform 0.2s ease, background-color 0.3s ease;
@@ -255,6 +274,9 @@ nav {
     flex-direction: column;
     margin-top: 90px;
     gap: 5px;
+  }
+  .grid {
+    margin-bottom: 10px;
   }
   .key {
     min-width: 0;
