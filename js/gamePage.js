@@ -5,7 +5,7 @@ let classes = ['grid', 'confetti-container', 'overlay', 'win-modal', 'lose-modal
 const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split(''), keyLayout = [['Q','W','E','R','T','Y','U','I','O','P'], ['A','S','D','F','G','H','J','K','L'], ['Enter','Z','X','C','V','B','N','M','Backspace']];
 
 let affData, dicData, dictionary;
-let words, wordNum, letterNum, numOfCorrectLetters, chosen, entered, numOfHints, letterStates = {}, revealedLetters = new Set([]);
+let words, wordNum, letterNum, numOfCorrectLetters, chosen, entered, numOfHints, letterStates = {}, revealedLetters = new Set([]), revealed;
 
 import * as help from './help.js';
 
@@ -167,7 +167,7 @@ const confetti = function () {
   }
 }
 
-const validEntry = (key) => key == "ENTER" && words[wordNum].every((letter) => alphabet.includes(letter.innerHTML) || letter.innerHTML == ' ') && (entered.join('') === chosen.join('') || groceryWords.includes(entered.join('').toLowerCase()) || entered.every((word) => dictionary.check(word)));
+const validEntry = (key) => key == "ENTER" && words[wordNum].every((letter) => alphabet.includes(letter.innerHTML) || letter.innerHTML == ' ') && (entered.join('') === chosen.join('') || groceryWords.includes(entered.join('').toLowerCase()) || dictionary.check(entered.join('')));
 
 const win = function () {
   setTimeout(() => {
