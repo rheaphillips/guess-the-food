@@ -270,6 +270,9 @@ nav {
   .home {
     background-image: url('assets/background-phone.png');  
   }
+  .game {
+    background-image: url('assets/background-game-phone.png');  
+  }
   .buttons {
     flex-direction: column;
     margin-top: 90px;
