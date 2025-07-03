@@ -176,8 +176,9 @@ nav {
 .text-box {
   background-color: #fff;
   border: 2px solid #dcdcdc;
-  font-size: 1.5rem;
+  font-size: 24px;
   font-weight: bold;
+  margin: 3px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
   border-radius: 10px;
   transition: transform 0.2s ease, background-color 0.3s ease;
@@ -236,10 +237,9 @@ nav {
   
 .key {
   width: fit-content;
-  min-width: 27px;
-  height: 27px;
-  padding: 10px;
-  margin: 3px;
+  min-width: 2rem;
+  height: 2rem;
+  padding: 0.5rem;
   border: none;
 }
 
@@ -257,12 +257,14 @@ nav {
     gap: 5px;
   }
   .key {
-    width: fit-content;
-    min-width: 1rem;
-    height: 27px;
-    padding: 0.5rem;
-    margin: 3px;
-    border: none;
+    min-width: 0;
+    max-width: 15%;
+    border-radius: 7px;
+    font-size: 20px;
+    margin: 2px;
+  }
+  .key i {
+    font-size: 20px;
   }
 }
 

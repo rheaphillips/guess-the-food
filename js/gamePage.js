@@ -2,7 +2,7 @@ let groceryWords = ["apple", "grape", "peach", "mango", "lemon", "onion", "beans
 
 let classes = ['grid', 'confetti-container', 'overlay', 'win-modal', 'lose-modal', 'keyboard', 'play-again', 'play-again-lose', 'hint-button', 'hint-image', 'restart-button'], elems = {}, colourStates = ['correct', 'present', 'absent'];
 
-const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split(''), keyLayout = [['Q','W','E','R','T','Y','U','I','O','P'], ['A','S','D','F','G','H','J','K','L'], ['Enter','Z','X','C','V','B','N','M','Backspace']];
+const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split(''), keyLayout = [['Q','W','E','R','T','Y','U','I','O','P'], ['A','S','D','F','G','H','J','K','L'], ['Enter','Z','X','C','V','B','N','M','backspace']];
 
 let affData, dicData, dictionary;
 let words, wordNum, letterNum, numOfCorrectLetters, chosen, entered, numOfHints, letterStates = {}, revealedLetters = new Set([]), revealed;
@@ -29,12 +29,20 @@ const createKeyboard = function () {
   keyLayout.forEach(row => {
   const rowEl = document.createElement('div');
     rowEl.className = 'keyboard-row';
-
     row.forEach(key => {
-      const keyEl = document.createElement('div');
+      let keyEl = document.createElement('div');
+      if (key == 'backspace') {
+        let keyElIcon = document.createElement('i');
+        keyElIcon.classList.add('material-icons');
+        keyElIcon.innerHTML = key;
+        keyElIcon.setAttribute('data-key', key);
+        keyEl.appendChild(keyElIcon);
+      }
+      else {
+        keyEl.innerHTML = key;
+        keyEl.setAttribute('data-key', key);
+      } 
       ['box', 'text-box', 'key'].forEach((cls) => keyEl.classList.add(cls));
-      keyEl.textContent = key;
-      keyEl.setAttribute('data-key', key);
       rowEl.appendChild(keyEl);
     });
 
