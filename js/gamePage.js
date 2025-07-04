@@ -133,12 +133,11 @@ const createGrid = function () {
 
 const createBoxes = function () {
   createGrid();
-  let box, hintBox, word, hint, k = 0;
+  let box, hintBox, word, hint;
   for (let i = 0; i < 6; i++) {
     word = [];
     hint = [];
     for (let j = 0; j < chosen.length; j++) {
-      k++;
       box = document.createElement('div');
       hintBox = document.createElement('div');
       box.classList.add('box');
@@ -148,7 +147,7 @@ const createBoxes = function () {
       if (chosen[j] != ' ') box.classList.add('text-box');
       word.push(box);
       hint.push(hintBox);
-      flipBox(box, k*20);
+      flipBox(box, (i+1)*100);
     }
     words.push(word);
     hints.push(hint);

@@ -223,7 +223,8 @@ nav {
 }
 
 .text-box.active {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+  border: 2px solid #c2c0c0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
 }
 
 .text-box.correct {
