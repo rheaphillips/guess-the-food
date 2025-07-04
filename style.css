@@ -307,8 +307,32 @@ nav {
   .key i {
     font-size: 20px;
   }
+
   .key:hover {
-    background: #fff;
+    background-color: #fff;
+    border: none;
+    transform: scale(1);
+  }
+
+  .key.correct:hover {
+    background-color: #338475; /* Green */
+    color: white;
+    border: none;
+    transform: scale(1);
+  }
+
+  .key.present:hover {
+    background-color: #d6a200; /* Yellow */
+    color: white;
+    border: none;
+    transform: scale(1);
+  }
+
+  .key.absent:hover {
+    background-color: #4b4f54; /* Gray */
+    color: white;
+    border: none;
+    transform: scale(1);
   }
 }
 
