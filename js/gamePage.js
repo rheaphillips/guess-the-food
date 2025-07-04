@@ -329,8 +329,6 @@ const evalKey = function (key) {
     } else {
       curLetter.innerHTML = '';
     }
-    console.log(curLetter.textContent);
-    console.log(curLetter.innerHTML);
   }
 }
 
