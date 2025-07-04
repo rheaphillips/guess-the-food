@@ -5,7 +5,7 @@ let classes = ['grid', 'confetti-container', 'overlay', 'win-modal', 'lose-modal
 const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split(''), keyLayout = [['Q','W','E','R','T','Y','U','I','O','P'], ['A','S','D','F','G','H','J','K','L'], ['Enter','Z','X','C','V','B','N','M','backspace']];
 
 let affData, dicData, dictionary;
-let words, wordNum, letterNum, numOfCorrectLetters, chosen, entered, numOfHints, letterStates = {}, revealedLetters = new Set([]), revealed;
+let words, hints, wordNum, letterNum, numOfCorrectLetters, chosen, entered, numOfHints, letterStates = {}, revealedLetters = new Set([]), revealedHints = new Set([]), revealed;
 
 import * as help from './help.js';
 
@@ -65,15 +65,18 @@ const resetRow = function () {
   numOfCorrectLetters = 0;
   letterNum = 0;
   entered = chosen.map((elem) => elem == ' ' ? ' ' : '');
+  setTimeout(() => [...revealedHints].forEach(letterNum => words[wordNum][letterNum].appendChild(hints[wordNum][letterNum])), 1800);
 }
 
 const resetGlobalVars = function () {
   words = [];
+  hints = [];
   wordNum = 0;
   chosen = [];
   numOfHints = 3;
   letterStates = {};
   revealedLetters.clear();
+  revealedHints.clear();
   resetRow();
   elems.confettiContainer.innerHTML = '';
   elems.hintImage.src = `./assets/hint-${numOfHints}.png`;
@@ -87,7 +90,10 @@ const randomizeWord = function () {
   [chosen] = groceryWords.splice(Math.round(Math.random()*(groceryWords.length - 1)), 1);
   chosen = chosen.toUpperCase().split('');
   entered = chosen.map((elem) => elem == ' ' ? ' ' : '');
-  chosen.forEach((elem, i) => {if (elem == ' ') revealedLetters.add(i)});
+  chosen.forEach((elem, i) => {if (elem == ' ') {
+    revealedLetters.add(i);
+    revealedHints.add(i);
+  }});
   console.log('New word:', chosen);
 }
 
@@ -99,6 +105,7 @@ const giveHint = function () {
       index = Math.round(Math.random()*(chosen.length - 1));
     } while (revealedLetters.has(index) || chosen[index] == ' ')
     revealedLetters.add(index);
+    revealedHints.add(index);
     numOfCorrectLetters++;
     entered[index] = chosen[index];
     words[wordNum][index].innerHTML = chosen[index];
@@ -106,7 +113,7 @@ const giveHint = function () {
     updateLetterColor('correct', chosen[index], wordNum, index);
     elems.hintImage.src = `./assets/hint-${numOfHints}.png`;
     if (entered.join('') === chosen.join('')) win(); 
-    while (revealedLetters.has(letterNum) && alphabet.includes(words[wordNum][letterNum].innerHTML)) {
+    while (revealedLetters.has(letterNum) && words[wordNum][letterNum].textContent) {
       words[wordNum][letterNum].classList.remove('active');
       letterNum++;
       words[wordNum][letterNum].classList.add('active');
@@ -126,18 +133,25 @@ const createGrid = function () {
 
 const createBoxes = function () {
   createGrid();
-  let box, word, k = 0;
+  let box, hintBox, word, hint, k = 0;
   for (let i = 0; i < 6; i++) {
-    word = []
+    word = [];
+    hint = [];
     for (let j = 0; j < chosen.length; j++) {
       k++;
       box = document.createElement('div');
+      hintBox = document.createElement('div');
       box.classList.add('box');
+      hintBox.classList.add('box');
+      hintBox.classList.add('hintBox');
+      hintBox.innerHTML = chosen[j];
       if (chosen[j] != ' ') box.classList.add('text-box');
       word.push(box);
-      flipBox(box, k*50);
+      hint.push(hintBox);
+      flipBox(box, k*20);
     }
     words.push(word);
+    hints.push(hint);
   }
   words[0][0].classList.add('active');
 }
@@ -146,7 +160,10 @@ const flipBox = function (box, delay) {
   setTimeout(() => {
     elems.grid.appendChild(box);
     box.classList.add('flip');
-  }, delay)
+    setTimeout(() => {
+      box.classList.remove('flip');
+    }, delay*2);
+  }, delay);
 }
 
 const createEventListeners = function () {
@@ -202,7 +219,7 @@ const confetti = function () {
   }
 }
 
-const validEntry = (key) => key == "ENTER" && words[wordNum].every((letter) => alphabet.includes(letter.innerHTML) || letter.innerHTML == ' ') && (entered.join('') === chosen.join('') || groceryWords.includes(entered.join('').toLowerCase()) || dictionary.check(entered.join('')));
+const validEntry = (key) => key == "ENTER" && words[wordNum].every((letter) => letter.innerHTML) && (entered.join('') === chosen.join('') || groceryWords.includes(entered.join('').toLowerCase()) || dictionary.check(entered.join('')));
 
 const win = function () {
   setTimeout(() => {
@@ -231,7 +248,7 @@ const revealColours = function (wordNum, states) {
     setTimeout(() => {
       letter.classList.add('flip');
       setTimeout(() => {
-        updateLetterColor(states[i], letter.innerHTML, wordNum, i);
+        updateLetterColor(states[i], letter.textContent, wordNum, i);
       }, 300);
     }, i * 300);
   });
@@ -242,7 +259,13 @@ const evalKey = function (key) {
   let curLetter = words[wordNum][letterNum];
 
   if (letterNum < chosen.length && alphabet.includes(key)) {
-    if (revealedLetters.has(letterNum)) chosen[letterNum] == key ? curLetter.classList.add('correct') : curLetter.classList.remove('correct');
+    if (revealedLetters.has(letterNum)) {
+      if (chosen[letterNum] == key) {
+        curLetter.classList.add('correct')
+      } else {
+        curLetter.classList.remove('correct');
+      }
+    }
     curLetter.innerHTML = key;
     entered[letterNum] = key;
     words[wordNum][letterNum].classList.remove('active');
@@ -254,7 +277,7 @@ const evalKey = function (key) {
       letterNum++;
       words[wordNum][letterNum].classList.add('active');
     } 
-    while (revealedLetters.has(letterNum) && alphabet.includes(words[wordNum][letterNum].innerHTML)) {
+    while (revealedLetters.has(letterNum) && alphabet.includes(words[wordNum][letterNum].innerHTML) && letterNum < 4) {
       words[wordNum][letterNum].classList.remove('active');
       letterNum++;
       words[wordNum][letterNum].classList.add('active');
@@ -280,8 +303,8 @@ const evalKey = function (key) {
     if (entered.join('') === chosen.join('')) win();
     else if (wordNum === 5) lose(); 
     else {
-      resetRow();
       wordNum++;
+      resetRow();
       words[wordNum][letterNum].classList.add('active');
     }
   }
@@ -297,9 +320,18 @@ const evalKey = function (key) {
     } 
     entered[letterNum] = '';
     curLetter = words[wordNum][letterNum];
-    if (letterStates[curLetter.innerHTML] == 'correct') curLetter.classList.remove('correct');
-    if (letterStates[curLetter.innerHTML] == 'absent') curLetter.classList.remove('absent');
-    curLetter.innerHTML = '';
+    
+    if (letterStates[curLetter.textContent] == 'absent') curLetter.classList.remove('absent');
+    if (letterStates[curLetter.textContent] == 'correct') curLetter.classList.remove('correct');
+    
+    if (revealedHints.has(letterNum)) {
+      curLetter.innerHTML = '';
+      curLetter.appendChild(hints[wordNum][letterNum]);
+    } else {
+      curLetter.innerHTML = '';
+    }
+    console.log(curLetter.textContent);
+    console.log(curLetter.innerHTML);
   }
 }
 
