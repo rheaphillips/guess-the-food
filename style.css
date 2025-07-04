@@ -306,6 +306,9 @@ nav {
   .key i {
     font-size: 20px;
   }
+  .key:hover {
+    background: #fff;
+  }
 }
 
 /* || CONFETTI */
