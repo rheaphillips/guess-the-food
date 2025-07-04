@@ -1,6 +1,6 @@
 let groceryWords = ["apple", "grape", "peach", "mango", "lemon", "onion", "beans", "chard", "bacon", "steak", "roast", "cream", "gouda", "bread", "bagel", "pasta", "penne", "ramen", "flour", "sugar", "honey", "cumin", "thyme", "basil", "jelly", "yeast", "cocoa", "chips", "candy", "dates", "sushi", "juice", "broth", "stock", "mochi", "salsa", "pesto", "gravy", "decaf", "latte", "oreos", "guava", "pizza", "toast", "pears", "olive", "salad", "berry", "sauce", "spice", "wafer", "hazel", "curry", "cider", "tacos", "water", "melon", "limes", "beets", "snail", "leeks", "mints", "herbs", "grits", "crabs", "donut", "wheat", "fries", "cacao", "fudge", "icing", "scone", "pecan", "cakes", "kebab", "wings", "nacho", "chive", "dairy", "clams", "fruit", "crepe", "seeds", "pitas", "tarts", "prune", "mocha", "syrup", "ranch", "clove", "eggos", "okras", "plums", "prawn", "rolls", "tikka", "penne", "squid", "wraps", "tapas", "jello", "trout", "grain", "meats", "humus", "saute"];
 
-let classes = ['grid', 'confetti-container', 'overlay', 'win-modal', 'lose-modal', 'keyboard', 'play-again', 'play-again-lose', 'hint-button', 'hint-image', 'restart-button', 'menu-button', 'close-button'], elems = {}, colourStates = ['correct', 'present', 'absent'];
+let classes = ['grid', 'confetti-container', 'overlay', 'win-modal', 'lose-modal', 'keyboard', 'play-again', 'play-again-lose', 'hint-button', 'hint-image', 'restart-button', 'menu-button', 'close-button', 'logo', 'nav-btns'], elems = {}, colourStates = ['correct', 'present', 'absent'];
 
 const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split(''), keyLayout = [['Q','W','E','R','T','Y','U','I','O','P'], ['A','S','D','F','G','H','J','K','L'], ['Enter','Z','X','C','V','B','N','M','backspace']];
 
@@ -50,24 +50,15 @@ const createKeyboard = function () {
 }
 
 const revealNavbar = function () {
-  let links = document.querySelector('.nav-btns-phone');
-  let logo = document.querySelector('.logo-image');
-  links.style.display = 'flex';
-  links.style.flexDirection = 'row';
-  links.style.justifyContent = 'space-evenly';
-  links.style.alignItems = 'center';
-  logo.style.display = 'none';
+  elems.navBtns.classList.remove('hidden');
+  elems.logo.classList.add('hidden');
   elems.menuButton.classList.add('hidden');
-  elems.overlay.classList.remove('hidden');
 }
 
 const closeNavbar = function () {
-  let links = document.querySelector('.nav-btns-phone');
-  let logo = document.querySelector('.logo-image');
-  links.style.display = 'none';
-  logo.style.display = 'inline';
+  elems.logo.classList.remove('hidden');
   elems.menuButton.classList.remove('hidden');
-  elems.overlay.classList.add('hidden');
+  elems.navBtns.classList.add('hidden');
 }
 
 const resetRow = function () {

@@ -8,6 +8,7 @@ const changeNavbar = function (mql) {
         logo.classList.add('name');
         btns.classList.remove('nav-btns-web');
         btns.classList.add('nav-btns-phone');
+        btns.classList.add('hidden');
         menu.classList.remove('hidden');
         close.classList.remove('hidden');
     } 
@@ -19,6 +20,7 @@ const changeNavbar = function (mql) {
         document.querySelector('.name').classList.remove('hidden');
         btns.classList.add('nav-btns-web');
         btns.classList.remove('nav-btns-phone');
+        btns.classList.remove('hidden');
         menu.classList.add('hidden');
         close.classList.add('hidden');
     } 
