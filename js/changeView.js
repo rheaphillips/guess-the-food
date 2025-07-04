@@ -13,6 +13,7 @@ const changeNavbar = function (mql) {
         close.classList.remove('hidden');
     } 
     else {
+        logo.classList.remove('hidden');
         logoImage.src = 'assets/logo.png';
         navbar.classList.add('navbar-web');
         navbar.classList.remove('navbar-phone');
