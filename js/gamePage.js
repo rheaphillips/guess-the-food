@@ -126,19 +126,27 @@ const createGrid = function () {
 
 const createBoxes = function () {
   createGrid();
-  let box, word;
+  let box, word, k = 0;
   for (let i = 0; i < 6; i++) {
     word = []
     for (let j = 0; j < chosen.length; j++) {
+      k++;
       box = document.createElement('div');
       box.classList.add('box');
       if (chosen[j] != ' ') box.classList.add('text-box');
-      elems.grid.appendChild(box);
       word.push(box);
+      flipBox(box, k*50);
     }
     words.push(word);
   }
   words[0][0].classList.add('active');
+}
+
+const flipBox = function (box, delay) {
+  setTimeout(() => {
+    elems.grid.appendChild(box);
+    box.classList.add('flip');
+  }, delay)
 }
 
 const createEventListeners = function () {
