@@ -118,6 +118,9 @@ const giveHint = function () {
       letterNum++;
       words[wordNum][letterNum].classList.add('active');
     }
+  } else {
+    elems.hintButton.classList.add('invalid');
+    setTimeout(() => elems.hintButton.classList.remove('invalid'), 500);
   }
 }
 
@@ -306,28 +309,36 @@ const evalKey = function (key) {
       resetRow();
       words[wordNum][letterNum].classList.add('active');
     }
-  }
+  } else if (key == "ENTER") {
+    accessKey('Enter').classList.add('invalid');
+    setTimeout(() => accessKey('Enter').classList.remove('invalid'), 500);
+  } 
 
-  if (key == "BACKSPACE" && letterNum > 0) {
-    if (letterNum < chosen.length) words[wordNum][letterNum].classList.remove('active');
-    words[wordNum][letterNum - 1].classList.add('active');
-    letterNum--;
-    if (chosen[letterNum] == ' ') {
+  if (key == "BACKSPACE") {
+    if (letterNum > 0) {
+      if (letterNum < chosen.length) words[wordNum][letterNum].classList.remove('active');
+      words[wordNum][letterNum - 1].classList.add('active');
       letterNum--;
-      words[wordNum][letterNum].classList.remove('active');
-      words[wordNum][letterNum].classList.add('active');
-    } 
-    entered[letterNum] = '';
-    curLetter = words[wordNum][letterNum];
-    
-    if (letterStates[curLetter.textContent] == 'absent') curLetter.classList.remove('absent');
-    if (letterStates[curLetter.textContent] == 'correct') curLetter.classList.remove('correct');
-    
-    if (revealedHints.has(letterNum)) {
-      curLetter.innerHTML = '';
-      curLetter.appendChild(hints[wordNum][letterNum]);
+      if (chosen[letterNum] == ' ') {
+        letterNum--;
+        words[wordNum][letterNum].classList.remove('active');
+        words[wordNum][letterNum].classList.add('active');
+      } 
+      entered[letterNum] = '';
+      curLetter = words[wordNum][letterNum];
+      
+      if (letterStates[curLetter.textContent] == 'absent') curLetter.classList.remove('absent');
+      if (letterStates[curLetter.textContent] == 'correct') curLetter.classList.remove('correct');
+      
+      if (revealedHints.has(letterNum)) {
+        curLetter.innerHTML = '';
+        curLetter.appendChild(hints[wordNum][letterNum]);
+      } else {
+        curLetter.innerHTML = '';
+      }
     } else {
-      curLetter.innerHTML = '';
+      accessKey('backspace').classList.add('invalid');
+      setTimeout(() => accessKey('backspace').classList.remove('invalid'), 500);
     }
   }
 }
