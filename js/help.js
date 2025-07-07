@@ -6,6 +6,8 @@ export function createHelpModal() {
   <ul>
     <li>Each guess must be a valid food item that is 5 letters long</li>
     <li>After entering each word, the colour of the tiles change to reveal how close your guess was to the word</li>
+    <li>Click <img src="assets/hint-0.png" class="help-img"> for upto three hints</li>
+    <li>Click  <img src="assets/restart.png" class="help-img">   to reshuffle the word</li>
   </ul>
   <h2>Examples</h2>
   <img src="assets/instructions-1.png" alt="correct letter" class="modal-img">
