@@ -491,7 +491,7 @@ const resetRow = function (rh) {
   setTimeout(
     () =>
       [...rh].forEach((letterNum) =>
-        words[wordNum][letterNum].appendChild(hints[wordNum][letterNum])
+        words[wordNum][letterNum]?.appendChild(hints[wordNum][letterNum])
       ),
     1800
   );
