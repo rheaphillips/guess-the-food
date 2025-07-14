@@ -415,7 +415,7 @@ const evalKey = function (key) {
     else if (wordNum === 5) lose();
     else {
       wordNum++;
-      resetRow();
+      resetRow([...new Array(revealedHints)]);
       words[wordNum][letterNum].classList.add("active");
     }
   } else if (key == "ENTER") {
@@ -484,13 +484,13 @@ const createEventListeners = function () {
 
 //////////////// RESETTING GLOBAL VARIABLES ////////////////
 
-const resetRow = function () {
+const resetRow = function (rh) {
   numOfCorrectLetters = 0;
   letterNum = 0;
   entered = chosen.map((elem) => (elem == " " ? " " : ""));
   setTimeout(
     () =>
-      [...revealedHints].forEach((letterNum) =>
+      [...rh].forEach((letterNum) =>
         words[wordNum][letterNum].appendChild(hints[wordNum][letterNum])
       ),
     1800
@@ -506,7 +506,7 @@ const resetGlobalVars = function () {
   letterStates = {};
   revealedLetters.clear();
   revealedHints.clear();
-  resetRow();
+  resetRow([...new Array(revealedHints)]);
   elems.confettiContainer.innerHTML = "";
   elems.hintImage.src = `./assets/hint-${numOfHints}.png`;
 };
