@@ -1,7 +1,6 @@
 /* || GENERAL STYLES */
 
-.guess-the-food-home,
-.guess-the-food-game {
+.guess-the-food-body {
   /* BACKGROUND IMAGE SETTINGS */
   background-size: auto 100vh;
   background-attachment: fixed;
@@ -32,32 +31,32 @@
   background-color: rgba(0, 0, 0, 0.5);
 }
 
-h1 {
+.guess-the-food-body h1 {
   font-size: 20px;
 }
 
-h2 {
+.guess-the-food-body h2 {
   font-size: 15px;
 }
 
-ul {
+.guess-the-food-body ul {
   margin-left: -25px;
 }
 
-h2,
-p,
-li {
+.guess-the-food-body h2,
+.guess-the-food-body p,
+.guess-the-food-body li {
   text-align: left;
 }
 
-li,
-p {
+.guess-the-food-body li,
+.guess-the-food-body p {
   font-size: 15px;
 }
 
 /* || NAVIGATION */
 
-nav {
+.guess-the-food-body nav {
   position: fixed;
   top: 0;
   left: 0;
@@ -131,6 +130,10 @@ nav {
 .guess-the-food-nav-btn img:hover {
   transform: scale(1.2);
   cursor: pointer;
+}
+
+.guess-the-food-logo {
+  margin-left: 30px;
 }
 
 /* || BUTTONS */
