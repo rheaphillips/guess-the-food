@@ -1,23 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Needs Mini Game: Guess the Food!</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body class="home">
-    <div class="buttons">
-        <a href="game.html" class= "button play-button">
-            <img src="assets/play.png" alt="play" class = "button">
-        </a>
-        <button class="button help-button instructions-button">
-            <img src="assets/instructions.png" alt="instructions" class = "button">
-        </button>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="guess-the-food-home">
+    <div class="guess-the-food-buttons">
+      <a
+        href="game.html"
+        class="guess-the-food-button guess-the-food-play-button"
+      >
+        <img src="assets/play.png" alt="play" class="guess-the-food-button" />
+      </a>
+      <button
+        class="guess-the-food-button guess-the-food-help-button guess-the-food-instructions-button"
+      >
+        <img
+          src="assets/instructions.png"
+          alt="instructions"
+          class="guess-the-food-button"
+        />
+      </button>
     </div>
-    <div class="modal help-modal hidden"></div>
-    <div class="overlay hidden"></div>
+    <div
+      class="guess-the-food-modal guess-the-food-help-modal guess-the-food-hidden"
+    ></div>
+    <div class="guess-the-food-overlay guess-the-food-hidden"></div>
     <script type="module" src="js/help.js"></script>
     <script type="module" src="js/homePage.js"></script>
-</body>
+  </body>
 </html>

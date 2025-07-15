@@ -1,88 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Needs Mini Game: Guess the Food!</title>
-  <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-</head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Needs Mini Game: Guess the Food!</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+  </head>
 
-<body class="game">
+  <body class="guess-the-food-game">
+    <!-- NAVIGATION BAR -->
+    <nav>
+      <ul class="guess-the-food-navbar guess-the-food-navbar-web">
+        <li class="guess-the-food-nav-item guess-the-food-logo">
+          <a type="button" href="index.html">
+            <img
+              src="assets/logo.png"
+              class="guess-the-food-logo-image"
+              alt="Needs: Mini Game"
+            />
+          </a>
+        </li>
+        <li class="guess-the-food-nav-item guess-the-food-name">
+          <img src="assets/name.png" alt="Guess the Food" />
+        </li>
+        <li class="guess-the-food-nav-btns guess-the-food-nav-btns-web">
+          <a
+            type="button"
+            class="guess-the-food-nav-item guess-the-food-nav-btn guess-the-food-home-button"
+            href="index.html"
+          >
+            <img src="assets/home.png" alt="home" />
+          </a>
+          <button
+            type="button"
+            class="guess-the-food-nav-item guess-the-food-nav-btn guess-the-food-help-button"
+          >
+            <img src="assets/help.png" alt="help" />
+          </button>
+          <button
+            type="button"
+            class="guess-the-food-nav-item guess-the-food-nav-btn guess-the-food-hint-button"
+          >
+            <img
+              src="assets/hint-3.png"
+              class="guess-the-food-hint-image"
+              alt="hint"
+            />
+          </button>
+          <button
+            type="button"
+            class="guess-the-food-nav-item guess-the-food-nav-btn guess-the-food-restart-button"
+          >
+            <img src="assets/restart.png" alt="restart" />
+          </button>
+          <button
+            type="button"
+            class="guess-the-food-nav-item guess-the-food-nav-btn guess-the-food-close-button guess-the-food-hidden"
+          >
+            <img src="assets/close.png" alt="close" />
+          </button>
+        </li>
+        <li class="guess-the-food-menu-button guess-the-food-hidden">
+          <button
+            type="button"
+            class="guess-the-food-nav-item guess-the-food-nav-btn"
+          >
+            <img src="assets/menu.png" alt="menu" />
+          </button>
+        </li>
+      </ul>
+    </nav>
 
-  <!-- NAVIGATION BAR -->
-  <nav>
-    <ul class="navbar navbar-web">
-      <li class="nav-item logo" >
-        <a type="button" href="index.html">
-          <img src="assets/logo.png" class="logo-image" alt="Needs: Mini Game">
-        </a>
-      </li>
-      <li class="nav-item name">
-        <img src="assets/name.png" alt="Guess the Food">
-      </li>
-      <li class="nav-btns nav-btns-web">
-        <a type="button" class="nav-item nav-btn home-button" href="index.html">
-          <img src="assets/home.png" alt="home">
-        </a>
-        <button type="button" class="nav-item nav-btn help-button">
-          <img src="assets/help.png" alt="help">
-        </button>
-        <button type="button" class="nav-item nav-btn hint-button">
-          <img src="assets/hint-3.png" class="hint-image" alt="hint">
-        </button>
-        <button type="button" class="nav-item nav-btn restart-button">
-          <img src="assets/restart.png" alt="restart">
-        </button>
-        <button type="button" class="nav-item nav-btn close-button hidden">
-          <img src="assets/close.png" alt="close">
-        </button>
-      </li>
-      <li class="menu-button hidden">
-        <button type="button" class="nav-item nav-btn">
-          <img src="assets/menu.png" alt="menu">
-        </button>
-      </li>
+    <!-- MAIN GAME -->
+    <div class="guess-the-food-grid"></div>
+    <div class="guess-the-food-keyboard"></div>
 
-    </ul>
-  </nav>
+    <!-- MODALS -->
+    <div
+      class="guess-the-food-modal guess-the-food-help-modal guess-the-food-hidden"
+    ></div>
 
-  <!-- MAIN GAME -->
-  <div class="grid"></div>
-  <div class="keyboard"></div>
+    <div
+      class="guess-the-food-modal guess-the-food-win-modal guess-the-food-hidden"
+    >
+      <h1>🎉 YOU WON!</h1>
+      <button class="guess-the-food-play-again">
+        <img
+          src="assets/play-again.png"
+          alt="play-again"
+          class="guess-the-food-modal-img"
+        />
+      </button>
+    </div>
 
-  <!-- MODALS -->
-  <div class="modal help-modal hidden"></div>
+    <div
+      class="guess-the-food-modal guess-the-food-lose-modal guess-the-food-hidden"
+    >
+      <h1>💔 YOU LOST!</h1>
+      <h2 class="guess-the-food-reveal-word"></h2>
+      <button class="guess-the-food-play-again-lose">
+        <img
+          src="assets/try-again.png"
+          alt="try-again"
+          class="guess-the-food-modal-img"
+        />
+      </button>
+    </div>
 
-  <div class="modal win-modal hidden">
-    <h1>🎉 YOU WON!</h1>
-    <button class="play-again">
-      <img src="assets/play-again.png" alt="play-again" class="modal-img">
-    </button>
-  </div>
+    <!-- OVERLAY -->
+    <div class="guess-the-food-overlay guess-the-food-hidden"></div>
 
-  <div class="modal lose-modal hidden">
-    <h1>💔 YOU LOST!</h1>
-    <h2 id="reveal-word"></h2>
-    <button class="play-again-lose">
-      <img src="assets/try-again.png" alt="try-again" class="modal-img">
-    </button>
-  </div>
+    <!-- CONFETTI -->
+    <div class="guess-the-food-confetti-container"></div>
 
-  <!-- OVERLAY -->
-  <div class="overlay hidden"></div>
+    <!-- SPELLING DICTIONARY -->
+    <script src="typo/typo.js"></script>
 
-  <!-- CONFETTI -->
-  <div class="confetti-container"></div>
-
-  <!-- SPELLING DICTIONARY -->
-  <script src="typo/typo.js"></script>
-
-  <!-- JS SCRIPTS -->
-  <script type="module" src="js/help.js"></script>
-  <script type="module" src="js/gamePage.js"></script>
-  <script type="module" src="js/selectElements.js"></script>
-  <script type="module" src="js/changeView.js"></script>
-</body>
+    <!-- JS SCRIPTS -->
+    <script type="module" src="js/help.js"></script>
+    <script type="module" src="js/gamePage.js"></script>
+    <script type="module" src="js/selectElements.js"></script>
+    <script type="module" src="js/changeView.js"></script>
+  </body>
 </html>
-

@@ -180,11 +180,11 @@ const createBoxes = function () {
     for (let j = 0; j < chosen.length; j++) {
       box = document.createElement("div");
       hintBox = document.createElement("div");
-      box.classList.add("box");
-      hintBox.classList.add("box");
-      hintBox.classList.add("hintBox");
+      box.classList.add("guess-the-food-box");
+      hintBox.classList.add("guess-the-food-box");
+      hintBox.classList.add("guess-the-food-hintBox");
       hintBox.innerHTML = chosen[j];
-      if (chosen[j] != " ") box.classList.add("text-box");
+      if (chosen[j] != " ") box.classList.add("guess-the-food-text-box");
       word.push(box);
       hint.push(hintBox);
       flipBox(box, (i + 1) * 100);
@@ -210,7 +210,7 @@ const flipBox = function (box, delay) {
 const createKeyboard = function () {
   keyLayout.forEach((row) => {
     const rowEl = document.createElement("div");
-    rowEl.className = "keyboard-row";
+    rowEl.className = "guess-the-food-keyboard-row";
     row.forEach((key) => {
       let keyEl = document.createElement("div");
       if (key == "backspace") {
@@ -222,7 +222,11 @@ const createKeyboard = function () {
         keyEl.innerHTML = key;
       }
       keyEl.setAttribute("data-key", key);
-      ["box", "text-box", "key"].forEach((cls) => keyEl.classList.add(cls));
+      [
+        "guess-the-food-box",
+        "guess-the-food-text-box",
+        "guess-the-food-key",
+      ].forEach((cls) => keyEl.classList.add(cls));
       rowEl.appendChild(keyEl);
     });
 
@@ -237,9 +241,9 @@ const clearKeyboard = () =>
   );
 
 const toggleNavbar = function () {
-  elems.navBtns.classList.toggle("hidden");
-  elems.logo.classList.toggle("hidden");
-  elems.menuButton.classList.toggle("hidden");
+  elems.navBtns.classList.toggle("guess-the-food-hidden");
+  elems.logo.classList.toggle("guess-the-food-hidden");
+  elems.menuButton.classList.toggle("guess-the-food-hidden");
 };
 
 //////////////// GENERATING A WORD ////////////////
@@ -286,8 +290,11 @@ const giveHint = function () {
       words[wordNum][letterNum].classList.add("active");
     }
   } else {
-    elems.hintButton.classList.add("invalid");
-    setTimeout(() => elems.hintButton.classList.remove("invalid"), 500);
+    elems.hintButton.classList.add("guess-the-food-invalid");
+    setTimeout(
+      () => elems.hintButton.classList.remove("guess-the-food-invalid"),
+      500
+    );
   }
 };
 
@@ -315,25 +322,25 @@ const revealColours = function (wordNum, states) {
 const win = function () {
   setTimeout(() => {
     confetti();
-    elems.overlay.classList.remove("hidden");
-    elems.winModal.classList.remove("hidden");
+    elems.overlay.classList.remove("guess-the-food-hidden");
+    elems.winModal.classList.remove("guess-the-food-hidden");
   }, 1800);
 };
 
 const lose = function () {
   setTimeout(() => {
-    document.getElementById("reveal-word").textContent = `Word: ${chosen.join(
-      ""
-    )}`;
-    elems.overlay.classList.remove("hidden");
-    elems.loseModal.classList.remove("hidden");
+    document.querySelector(
+      ".guess-the-food-reveal-word"
+    ).textContent = `Word: ${chosen.join("")}`;
+    elems.overlay.classList.remove("guess-the-food-hidden");
+    elems.loseModal.classList.remove("guess-the-food-hidden");
   }, 1800);
 };
 
 const confetti = function () {
   for (let i = 0; i < 100; i++) {
     const confetti = document.createElement("div");
-    confetti.classList.add("confetti");
+    confetti.classList.add("guess-the-food-confetti");
     confetti.style.left = `${Math.random() * 100}%`;
     confetti.style.animationDelay = `${Math.random() * 2}s`;
     confetti.style.width = `${Math.random() * 6 + 4}px`;
@@ -419,8 +426,11 @@ const evalKey = function (key) {
       words[wordNum][letterNum].classList.add("active");
     }
   } else if (key == "ENTER") {
-    accessKey("Enter").classList.add("invalid");
-    setTimeout(() => accessKey("Enter").classList.remove("invalid"), 500);
+    accessKey("Enter").classList.add("guess-the-food-invalid");
+    setTimeout(
+      () => accessKey("Enter").classList.remove("guess-the-food-invalid"),
+      500
+    );
   }
 
   if (key == "BACKSPACE") {
@@ -449,8 +459,11 @@ const evalKey = function (key) {
         curLetter.innerHTML = "";
       }
     } else {
-      accessKey("backspace").classList.add("invalid");
-      setTimeout(() => accessKey("backspace").classList.remove("invalid"), 500);
+      accessKey("backspace").classList.add("guess-the-food-invalid");
+      setTimeout(
+        () => accessKey("backspace").classList.remove("guess-the-food-invalid"),
+        500
+      );
     }
   }
 };
@@ -460,9 +473,11 @@ const evalKey = function (key) {
 const createEventListeners = function () {
   document.addEventListener("keydown", (e) => evalKey(e.key.toUpperCase()));
   elems.keyboard.addEventListener("click", (e) => {
-    if (e.target.classList.contains("key")) {
+    if (e.target.classList.contains("guess-the-food-key")) {
       evalKey(e.target.getAttribute("data-key").toUpperCase());
-    } else if (e.target?.parentElement.classList.contains("key")) {
+    } else if (
+      e.target?.parentElement.classList.contains("guess-the-food-key")
+    ) {
       evalKey(e.target.parentElement.getAttribute("data-key").toUpperCase());
     }
   });
@@ -519,7 +534,7 @@ const reset = function () {
   randomizeWord();
   createBoxes();
   [elems.overlay, elems.winModal, elems.loseModal].forEach((elem) =>
-    elem.classList.add("hidden")
+    elem.classList.add("guess-the-food-hidden")
   );
 };
 

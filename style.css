@@ -1,13 +1,14 @@
 /* || GENERAL STYLES */
 
-body {
+.guess-the-food-home,
+.guess-the-food-game {
   /* BACKGROUND IMAGE SETTINGS */
   background-size: auto 100vh;
   background-attachment: fixed;
   background-position: center;
 
   /* FONT APPEARANCE */
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   color: #333;
 
   /* SCROLL BAR SETTINGS */
@@ -22,13 +23,13 @@ body {
   align-items: center;
 }
 
-.home {
-  background-image: url('assets/background.png');  
+.guess-the-food-home {
+  background-image: url("assets/background.png");
 }
 
-.game {
-  background-image: url('assets/background-game1.png');
-  background-color: rgba(0,0,0,0.5);
+.guess-the-food-game {
+  background-image: url("assets/background-game1.png");
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 h1 {
@@ -43,11 +44,14 @@ ul {
   margin-left: -25px;
 }
 
-h2, p, li {
+h2,
+p,
+li {
   text-align: left;
 }
 
-li, p {
+li,
+p {
   font-size: 15px;
 }
 
@@ -59,11 +63,11 @@ nav {
   left: 0;
   width: 100%;
   height: 55px;
-  background-color: white; 
+  background-color: white;
   overflow: hidden;
 }
 
-.navbar-web {
+.guess-the-food-navbar-web {
   list-style-type: none;
   display: flex;
   justify-content: space-between;
@@ -72,27 +76,27 @@ nav {
   padding: 0px;
 }
 
-.navbar-phone {
+.guess-the-food-navbar-phone {
   position: relative;
   margin: 0px;
   padding: 0px;
 }
 
-.nav-btns-web {
+.guess-the-food-nav-btns-web {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
   align-items: center;
 }
 
-.nav-btns-phone {
+.guess-the-food-nav-btns-phone {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
   align-items: center;
 }
 
-.menu-button {
+.guess-the-food-menu-button {
   position: absolute;
   right: 0px;
   top: 0px;
@@ -101,13 +105,13 @@ nav {
   justify-content: center;
 }
 
-.name {
+.guess-the-food-name {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
 }
 
-.nav-item {
+.guess-the-food-nav-item {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -117,21 +121,21 @@ nav {
   background-color: rgb(255, 255, 255);
 }
 
-.nav-item img {
+.guess-the-food-nav-item img {
   transition: transform 0.2s ease;
   padding: 10px;
   height: 10vw;
   max-height: 30px;
 }
 
-.nav-btn img:hover {
+.guess-the-food-nav-btn img:hover {
   transform: scale(1.2);
   cursor: pointer;
 }
 
 /* || BUTTONS */
 
-.buttons {
+.guess-the-food-buttons {
   margin-top: 120px;
   display: flex;
   flex-direction: row;
@@ -139,7 +143,7 @@ nav {
   align-items: center;
 }
 
-.button {
+.guess-the-food-button {
   border: none;
   padding: 0px;
   margin: 0px;
@@ -150,11 +154,11 @@ nav {
   background-color: transparent;
 }
 
-.button:hover {
+.guess-the-food-button:hover {
   transform: scale(1.02);
 }
 
-.play-button img {
+.guess-the-food-play-button img {
   width: 30vw;
   height: 15vw;
   max-width: 90px;
@@ -163,37 +167,37 @@ nav {
   height: 60px; */
 }
 
-.play-button img:hover {
-  content: url('assets/play-hover.png');
+.guess-the-food-play-button img:hover {
+  content: url("assets/play-hover.png");
 }
 
-.instructions-button img {
+.guess-the-food-instructions-button img {
   width: 74.3181818182vw;
   height: 15vw;
   max-width: 222.9525px;
   max-height: 45px;
 }
 
-.instructions-button img:hover {
-  content: url('assets/instructions-hover.png');
+.guess-the-food-instructions-button img:hover {
+  content: url("assets/instructions-hover.png");
 }
 
 /* || GRID */
 
-.grid {
+.guess-the-food-grid {
   display: grid;
   grid-template-rows: repeat(6, 50px);
   margin-bottom: 20px;
 }
 
-.box {
+.guess-the-food-box {
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 1px;
 }
 
-.hintBox {
+.guess-the-food-hintBox {
   background-color: #338475;
   color: white;
   position: absolute;
@@ -207,7 +211,7 @@ nav {
   border-radius: 3px;
 }
 
-.text-box {
+.guess-the-food-text-box {
   background-color: #fff;
   border: 2px solid #dcdcdc;
   font-size: 24px;
@@ -218,29 +222,29 @@ nav {
   transform-style: preserve-3d;
 }
 
-.text-box:hover {
+.guess-the-food-text-box:hover {
   transform: scale(1.05);
   cursor: pointer;
 }
 
-.text-box.active {
+.guess-the-food-text-box.active {
   border: 2px solid #c2c0c0;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
 }
 
-.text-box.correct {
+.guess-the-food-text-box.correct {
   background-color: #338475; /* Green */
   color: white;
   border: none;
 }
 
-.text-box.present {
+.guess-the-food-text-box.present {
   background-color: #d6a200; /* Yellow */
   color: white;
   border: none;
 }
 
-.text-box.absent {
+.guess-the-food-text-box.absent {
   background-color: #4b4f54; /* Gray */
   color: white;
   border: none;
@@ -258,18 +262,18 @@ nav {
   }
 }
 
-.box.flip {
+.guess-the-food-box.flip {
   animation: flip 0.6s ease-in-out;
 }
 
 /* || KEYBOARD */
 
-.keyboard-row {
+.guess-the-food-keyboard-row {
   display: flex;
   justify-content: center;
 }
-  
-.key {
+
+.guess-the-food-key {
   width: fit-content;
   min-width: 2rem;
   height: 2rem;
@@ -278,57 +282,57 @@ nav {
   border: none;
 }
 
-.key:hover {
+.guess-the-food-key:hover {
   background: #afafaf;
 }
 
 @media only screen and (max-width: 800px) {
-  .home {
-    background-image: url('assets/background-phone.png');  
+  .guess-the-food-home {
+    background-image: url("assets/background-phone.png");
   }
-  .game {
-    background-image: url('assets/background-game-phone.png');  
+  .guess-the-food-game {
+    background-image: url("assets/background-game-phone.png");
   }
-  .buttons {
+  .guess-the-food-buttons {
     flex-direction: column;
     margin-top: 90px;
     gap: 5px;
   }
-  .grid {
+  .guess-the-food-grid {
     margin-bottom: 10px;
   }
-  .key {
+  .guess-the-food-key {
     min-width: 0;
     max-width: 15%;
     border-radius: 7px;
     font-size: 20px;
     margin: 2px;
   }
-  .key i {
+  .guess-the-food-key i {
     font-size: 20px;
   }
 
-  .key:hover {
+  .guess-the-food-key:hover {
     background-color: #fff;
     border: none;
     transform: scale(1);
   }
 
-  .key.correct:hover {
+  .guess-the-food-key.correct:hover {
     background-color: #338475; /* Green */
     color: white;
     border: none;
     transform: scale(1);
   }
 
-  .key.present:hover {
+  .guess-the-food-key.present:hover {
     background-color: #d6a200; /* Yellow */
     color: white;
     border: none;
     transform: scale(1);
   }
 
-  .key.absent:hover {
+  .guess-the-food-key.absent:hover {
     background-color: #4b4f54; /* Gray */
     color: white;
     border: none;
@@ -338,7 +342,7 @@ nav {
 
 /* || CONFETTI */
 
-.confetti-container {
+.guess-the-food-confetti-container {
   position: fixed;
   top: 0;
   left: 0;
@@ -349,7 +353,7 @@ nav {
   z-index: 1000;
 }
 
-.confetti {
+.guess-the-food-confetti {
   position: absolute;
   top: -20px; /* Start above the viewport */
   width: 10px;
@@ -361,11 +365,21 @@ nav {
 }
 
 /* Varying colors for Sobeys theme */
-.confetti:nth-child(5n)   { background-color: #007749; }
-.confetti:nth-child(5n+1) { background-color: #d6a200; }
-.confetti:nth-child(5n+2) { background-color: #4b4f54; }
-.confetti:nth-child(5n+3) { background-color: #ffffff; }
-.confetti:nth-child(5n+4) { background-color: #ff6f61; }
+.guess-the-food-confetti:nth-child(5n) {
+  background-color: #007749;
+}
+.guess-the-food-confetti:nth-child(5n + 1) {
+  background-color: #d6a200;
+}
+.guess-the-food-confetti:nth-child(5n + 2) {
+  background-color: #4b4f54;
+}
+.guess-the-food-confetti:nth-child(5n + 3) {
+  background-color: #ffffff;
+}
+.guess-the-food-confetti:nth-child(5n + 4) {
+  background-color: #ff6f61;
+}
 
 /* Fall animation */
 @keyframes fall {
@@ -375,10 +389,9 @@ nav {
   }
 }
 
-
 /* || MODALS */
 
-.overlay {
+.guess-the-food-overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -389,7 +402,7 @@ nav {
   z-index: 5;
 }
 
-.modal {
+.guess-the-food-modal {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -404,24 +417,24 @@ nav {
   z-index: 10;
 }
 
-.help-modal {
+.guess-the-food-help-modal {
   height: fit-content;
   max-height: 70vh;
   overflow-y: auto;
   width: 70vw;
 }
 
-.modal h1 {
+.guess-the-food-modal h1 {
   margin-top: 0;
 }
 
-.modal button {
+.guess-the-food-modal button {
   background-color: white;
   border: none;
   cursor: pointer;
 }
 
-.modal-img {
+.guess-the-food-modal-img {
   display: block;
   border: none;
   margin: 0;
@@ -430,14 +443,14 @@ nav {
   transition: transform 0.2s;
 }
 
-.help-img {
+.guess-the-food-help-img {
   position: relative;
   border: none;
   padding-bottom: -40px;
   height: 18px;
 }
 
-.close-modal {
+.guess-the-food-close-modal {
   position: absolute;
   top: 10px;
   right: 10px;
@@ -448,33 +461,45 @@ nav {
   background: none;
 }
 
-.play-again img:hover {
+.guess-the-food-play-again img:hover {
   transform: scale(1.05);
-  content: url('assets/play-again-hover.png');
+  content: url("assets/play-again-hover.png");
 }
 
-.play-again-lose img:hover {
+.guess-the-food-play-again-lose img:hover {
   transform: scale(1.05);
-  content: url('assets/try-again-hover.png');
+  content: url("assets/try-again-hover.png");
 }
 
-.invalid {
+.guess-the-food-invalid {
   animation: shake 0.5s;
 }
 
 @keyframes shake {
-    0% { transform: translate(2px, 0px);}
-    20% { transform: translate(-2px, 0px);}
-    40% { transform: translate(2px, 0px);}
-    60% { transform: translate(-2px, 0px);}
-    80% { transform: translate(2px, 0px);}
-    100% { transform: translate(-2px, 0px);}
+  0% {
+    transform: translate(2px, 0px);
   }
+  20% {
+    transform: translate(-2px, 0px);
+  }
+  40% {
+    transform: translate(2px, 0px);
+  }
+  60% {
+    transform: translate(-2px, 0px);
+  }
+  80% {
+    transform: translate(2px, 0px);
+  }
+  100% {
+    transform: translate(-2px, 0px);
+  }
+}
 
-.hidden {
+.guess-the-food-hidden {
   display: none;
 }
 
-#reveal-word {
+.guess-the-food-reveal-word {
   text-align: center;
 }
